@@ -6,6 +6,8 @@
 package model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -13,10 +15,13 @@ import javax.persistence.Id;
  * @author Gustavo
  * 
  */
-
+//lara: o address estava sem a anotação entity.
+@Entity
 public class Address {
     @Id
     @Column(name = "address_id")
+    //lara, acrescentei o generatedvalue
+    @GeneratedValue
     private Integer id;
     private String country;
     private String state;
