@@ -11,6 +11,7 @@ import javax.persistence.Id;
 /**
  *
  * @author Gustavo
+ * teste commit lara
  */
 public class Address {
     @Id
