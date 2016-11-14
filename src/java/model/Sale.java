@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -26,6 +27,7 @@ public class Sale implements Serializable {
     private User formerOwner;
     private User newOwner;
     private BigDecimal cost;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date date;
 
 }
