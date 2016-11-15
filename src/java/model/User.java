@@ -47,10 +47,5 @@ public class User implements Serializable {
     })
     private Set<Property> favorites = new HashSet<Property>(0);
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade=CascadeType.ALL)
-    private Set<Rent> rents = new HashSet<Rent>(0);
-    
-    
-    
-    
+   
 }

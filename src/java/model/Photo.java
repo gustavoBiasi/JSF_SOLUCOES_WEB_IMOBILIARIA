@@ -17,14 +17,11 @@ import javax.persistence.ManyToOne;
  * @author Gustavo
  */
 @Entity
-public class PropertyPhoto implements java.io.Serializable {
+public class Photo implements java.io.Serializable {
     @Id
     @GeneratedValue
     @Column(name="photo_id")
     private Integer id; 
-    @ManyToOne
-    @JoinColumn(name="property_id")
-    private Property property;
     private String fileName;
    
     
