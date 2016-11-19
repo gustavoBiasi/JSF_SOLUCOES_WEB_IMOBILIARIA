@@ -1,0 +1,32 @@
+
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:messages id="messages" />
+            <p:panelGrid columns="2">
+                <p:outputLabel for="userEmail" value="Email:" />
+                <p:inputText id="userEmail" value="#{loginManagedBean.user.email}" />
+                
+                <p:outputLabel for="password" value="Senha:" />
+                <p:password id="password" value="#{loginManagedBean.user.password}" />
+                           
+                <p:commandButton value="Enviar" icon="ui-icon-star" action="#{loginManagedBean.send}" ajax="false">
+                </p:commandButton>
+                
+            </p:panelGrid>
+        </h:form>
+    </h:body>
+</html>

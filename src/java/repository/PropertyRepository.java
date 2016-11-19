@@ -5,8 +5,12 @@
  */
 package repository;
 
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import model.Property;
+import utils.EntityManagerSingleton;
 
 /**
  *
@@ -15,11 +19,44 @@ import model.Property;
 public class PropertyRepository {
     private EntityManager manager;
     
-    public PropertyRepository(EntityManager manager){
-        this.manager=manager;
+    public PropertyRepository(){
+        this.manager = EntityManagerSingleton.getEntityManager();
     }
     
-    public void AddProperty(Property property){
-        this.manager.persist(property);
+    public boolean addProperty(Property property){
+        try{
+            this.manager.persist(property);
+            return true;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
+    
+    public List<Property> findAllPropertiesNotOwned(long userId)
+    {
+          try{
+            Query query = manager.createQuery("SELECT p FROM Property p WHERE p.owner.id != :userid");
+            query.setParameter("userid", userId);
+            return query.getResultList();
+        }catch(NoResultException e) {
+            return null;
+        }
+        
+    }
+    
+    public List<Property> findAllFavoritedProperties(long userId)
+    {
+          try{
+            Query query = manager.createQuery("select fav from User u join u.favorites fav where u.id = :userid");
+            query.setParameter("userid", userId);
+            return query.getResultList();
+        }catch(NoResultException e) {
+            return null;
+        }
+        
+    }
+    
+    
 }

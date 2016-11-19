@@ -8,6 +8,7 @@ package repository;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import model.Photo;
+import utils.EntityManagerSingleton;
 
 /**
  *
@@ -15,12 +16,22 @@ import model.Photo;
  */
 public class PhotoRepository {
     private EntityManager manager;
-    public PhotoRepository(EntityManager manager){
-        this.manager=manager;
+    public PhotoRepository(){
+        this.manager = EntityManagerSingleton.getEntityManager();
     }
-    public void Add(Photo photo){
-        this.manager.persist(photo);
+    public boolean addPhoto(Photo photo){
+      
+        try{
+            this.manager.persist(photo);
+            return true;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
+    
+    
     // preciso do acesso  bidirecional, ou seja, nas fotos preciso que as propriedades estejam mapeadas
    
 }
