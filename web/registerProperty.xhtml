@@ -1,0 +1,73 @@
+
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:messages id="messages" />
+            <p:panelGrid columns="2">
+                <p:outputLabel for="title" value="Titulo:" />
+                <p:inputText id="title"  maxlength="100" value="#{registerPropertyManagedBean.property.title}" required="true" />
+                
+                <p:outputLabel for="salePrice" value="Preço de venda:" />
+                <p:inputText id="salePrice"  value="#{registerPropertyManagedBean.property.salePrice}"  />
+
+                <p:outputLabel for="dailyRentPrice" value="Aluguel Diário:" />
+                <p:inputText id="dailyRentPrice"   value="#{registerPropertyManagedBean.property.dailyRentPrice}"  />
+                
+                <p:outputLabel for="birthday" value="Birthday:" />
+                <p:calendar value="#{registerPropertyManagedBean.property.categoriy}" pattern="dd/MM/yyyy"/>
+                
+                
+
+                                
+                <p:outputLabel for="phone" value="Telefone:" />
+                <p:inputMask id="phone" mask="999-999999999"  value="#{signUpManagedBean.user.phone}" required="true" />
+                   
+             
+                 
+                <p:outputLabel for="cep" value="Cep:" />
+                <p:inputMask mask="99999-999" id="cep" value="#{signUpManagedBean.user.adress.cep}" required="true" 
+                             validatorMessage="Insira um CEP válido">   
+                     <f:validateRegex pattern="\\d{5}-\\d{3}" for="cep">
+                </inputText>
+                
+                 
+                <p:outputLabel for="street" value="Rua:" />
+                <p:inputText id="street" value="#{signUpManagedBean.user.adress.street}" required="true"/>
+                
+                <p:outputLabel for="numero" value="Número:" />
+                <p:inputText id="number" value="#{signUpManagedBean.user.adress.number}" required="true" >
+                   
+                </p:inputText>
+                
+                <p:outputLabel for="cidade" value="Cidade:" />
+                <p:inputText id="city" value="#{signUpManagedBean.user.adress.city}" required="true"/>          
+                
+                <p:outputLabel for="estado" value="Estado:" />
+                <p:inputText id="state"  maxlength="2" value="#{signUpManagedBean.user.adress.state}" required="true"/>      
+                
+                <p:outputLabel for="country" value="Pais" />
+                <p:inputText id="country" value="#{signUpManagedBean.user.adress.country}" required="true"/>                      
+                
+                <p:outputLabel for="addinfo" value="Additional Info:" />
+                <p:inputText id="addinfo" value="#{signUpManagedBean.user.adress.additionalInfo}" required="true"/>         
+                
+                <p:commandButton value="Prosseguir" icon="ui-icon-check"  action="#{signUpManagedBean.createUser}" ajax="false">
+                </p:commandButton>
+                
+            </p:panelGrid>
+        </h:form>
+    </h:body>
+</html>

@@ -36,7 +36,9 @@ public class Property implements Serializable{
     @JoinColumn(name = "user_id")
     private User owner;
     
+    private String title;
 
+ 
     
     private BigDecimal  salePrice;
     
@@ -88,7 +90,21 @@ public class Property implements Serializable{
     public void setOwner(User owner) {
         this.owner = owner;
     }
+   public String getTitle() {
+        return title;
+    }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
     public BigDecimal getSalePrice() {
         return salePrice;
     }

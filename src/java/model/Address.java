@@ -24,18 +24,28 @@ public class Address {
     //lara, acrescentei o generatedvalue
     @GeneratedValue
     private Integer id;
-    private String country;
+   
+    @Column(length = 2)
     private String state;
     private String city;
     private String street;
     private String number;
+    private String district; //bairro
     private String cep;
     private String additionalInfo;
     
-    @OneToOne(mappedBy="address")
-    private User user;
-    @OneToOne(mappedBy="address")
-    private Property property;
+//    @OneToOne(mappedBy="address")
+//    private User user;
+//    @OneToOne(mappedBy="address")
+//    private Property property;
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
     
     
 
@@ -48,13 +58,7 @@ public class Address {
         this.id = id;
     }
 
-    public String getCountry() {
-        return country;
-    }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
 
     public String getState() {
         return state;
@@ -104,20 +108,20 @@ public class Address {
         this.additionalInfo = additionalInfo;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Property getProperty() {
-        return property;
-    }
-
-    public void setProperty(Property property) {
-        this.property = property;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
+//
+//    public Property getProperty() {
+//        return property;
+//    }
+//
+//    public void setProperty(Property property) {
+//        this.property = property;
+//    }
     
 }

@@ -45,15 +45,41 @@ public class UserRepository {
         
     }
     
-    public User authenticateUser(String login, String password){
+    public User getUser(int userId)
+    {
+        try{
+            User user = this.manager.find(User.class, userId);
+        
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return user;
+    }
+    public User authenticateUser(String email, String password){
         try{
              
             Query query = this.manager.createQuery("select u from User u where u.email= :login and u.password = :password");
-            query.setParameter("login", login);
+            query.setParameter("login", email);
             query.setParameter("password", password);
             
             return (User) query.getSingleResult();
         }catch(NoResultException e)
+        {
+            return null;
+        }
+    }
+    
+    public User findUserByEmail(String email)
+    {
+        try
+        {
+            Query query = this.manager.createQuery("select u from User u where u.email = :email");
+            query.setParameter("email", email);
+            
+            return (User) query.getSingleResult();
+        }
+        catch(NoResultException e)
         {
             return null;
         }
