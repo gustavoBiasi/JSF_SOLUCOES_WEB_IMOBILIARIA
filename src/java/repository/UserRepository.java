@@ -47,8 +47,9 @@ public class UserRepository {
     
     public User getUser(int userId)
     {
+        User user = null;
         try{
-            User user = this.manager.find(User.class, userId);
+            user = this.manager.find(User.class, userId);
         
         }catch(Exception e)
         {

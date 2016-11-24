@@ -49,7 +49,7 @@ public class PropertyRepository {
     public List<Property> findAllFavoritedProperties(long userId)
     {
           try{
-            Query query = manager.createQuery("select fav from User u join u.favorites fav where u.id = :userid");
+            Query query = manager.createQuery("select fav from User u join u.favorites fav where u.id = :userid" );
             query.setParameter("userid", userId);
             return query.getResultList();
         }catch(NoResultException e) {
