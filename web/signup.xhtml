@@ -14,15 +14,15 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        <h:form>
+        <h:form id="signup">
             <p:messages id="messages" />
             <p:panelGrid columns="2">
                 <p:outputLabel for="userName" value="Nome:" />
-                <p:inputText id="userEmail"  maxlength="100" value="#{signUpManagedBean.user.name}" required="true" />
+                <p:inputText id="userName"  maxlength="100" value="#{signUpManagedBean.user.name}" required="true" />
                 <p:outputLabel for="userEmail" value="Email:" />
                 <p:inputText id="userEmail" type="email" value="#{signUpManagedBean.user.email}" required="true" />
                 <p:outputLabel for="birthday" value="Data de Nascimento:" />
-                <p:calendar value="#{signUpManagedBean.user.birthday}" pattern="dd/MM/yyyy"/>
+                <p:calendar id="birthday" value="#{signUpManagedBean.user.birthday}" pattern="dd/MM/yyyy"/>
                 <p:outputLabel for="password" value="Senha:" />
                 <p:password id="password" value="#{signUpManagedBean.user.password}" feedback="true" required="true"/>
                                 
@@ -34,23 +34,23 @@ and open the template in the editor.
                 <p:outputLabel for="cep" value="Cep:" />
                 <p:inputMask mask="99999-999" id="cep" value="#{signUpManagedBean.user.adress.cep}" required="true" 
                              validatorMessage="Insira um CEP válido">   
-                    <f:validateRegex pattern="\\d{5}-\\d{3}" for="cep">
-                    <p:ajax event="keyup" update="out" listener="#{signUpManagedBean.refreshCep}" />
-                </inputMask>
+                    <f:validateRegex pattern="\\d{5}-\\d{3}" for="cep"> </f:validateRegex>
+                    <p:ajax event="keyup" listener="#{signUpManagedBean.refreshCep}" />
+                </p:inputMask>
                 
                  
                 <p:outputLabel for="street" value="Rua:" />
                 <p:inputText id="street" value="#{signUpManagedBean.user.adress.street}" required="true"/>
                 
-                <p:outputLabel for="numero" value="Número:" />
+                <p:outputLabel for="number" value="Número:" />
                 <p:inputText id="number" value="#{signUpManagedBean.user.adress.number}" required="true" >
                    
                 </p:inputText>
                 
-                <p:outputLabel for="cidade" value="Cidade:" />
+                <p:outputLabel for="city" value="Cidade:" />
                 <p:inputText id="city" value="#{signUpManagedBean.user.adress.city}" required="true" disabled="true"/>          
                 
-                <p:outputLabel for="estado" value="Estado:" />
+                <p:outputLabel for="state" value="Estado:" />
                 <p:inputText id="state"  maxlength="2" value="#{signUpManagedBean.user.adress.state}" required="true" disabled="true" />      
 
                 <p:outputLabel for="addinfo" value="Complemento: " />

@@ -19,7 +19,7 @@ import utils.EntityManagerSingleton;
 public class CategoryRepository {
     private EntityManager manager;
     
-    public CategoryRepository(EntityManager manager){
+    public CategoryRepository(){
         this.manager = EntityManagerSingleton.getEntityManager();
     }
     

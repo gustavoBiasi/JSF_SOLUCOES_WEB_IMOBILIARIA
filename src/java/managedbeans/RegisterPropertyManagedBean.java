@@ -5,15 +5,21 @@
  */
 package managedbeans;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import model.Address;
+import model.Category;
+
 import model.Property;
-import model.User;
+import repository.CategoryRepository;
+
 import repository.PropertyRepository;
-import repository.UserRepository;
+
 
 /**
  *
@@ -23,10 +29,27 @@ import repository.UserRepository;
 @ManagedBean
 public class RegisterPropertyManagedBean {
     Property property = new Property();
-  
+    CategoryRepository categoryRepository = new CategoryRepository();
     
     PropertyRepository propertyRepository = new PropertyRepository();
+    private Map<Long,String> categories;
+    
+    @PostConstruct
+    public void init()
+    {
+        categories = new HashMap<>();
+        List<Category> categoryList = categoryRepository.getAllCategories();
+        
+        for(Category c : categoryList)
+        {
+            categories.put(c.getId(), c.getTitle());
+        }
+    }
 
+    public Map<Long, String> getCategories() {
+        return categories;
+    }
+    
     public Property getProperty() {
         return property;
     }

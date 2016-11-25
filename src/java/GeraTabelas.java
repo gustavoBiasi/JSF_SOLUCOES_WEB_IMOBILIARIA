@@ -1,6 +1,7 @@
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import repository.UserRepository;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,6 +17,8 @@ public class GeraTabelas {
     public static void main (String[] args){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("HomeComingPU");
         entityManagerFactory.close();
+        System.out.println("GeraTabelas.main()");
+        
     }
     
 }

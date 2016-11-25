@@ -9,7 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import model.Address;
+
 import model.User;
 import repository.UserRepository;
 import services.CepService;
@@ -52,6 +52,7 @@ public class SignUpManagedBean {
     public void refreshCep()
     {
            CepService cepService = new CepService(user.getAdress().getCep());
+           System.out.println("managedbeans.SignUpManagedBean.refreshCep()");
            if(cepService.getSuccess() == 0)
            {
                FacesContext.getCurrentInstance().addMessage(

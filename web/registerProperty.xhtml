@@ -26,9 +26,11 @@ and open the template in the editor.
                 <p:outputLabel for="dailyRentPrice" value="Aluguel Diário:" />
                 <p:inputText id="dailyRentPrice"   value="#{registerPropertyManagedBean.property.dailyRentPrice}"  />
                 
-                <p:outputLabel for="birthday" value="Birthday:" />
-                <p:calendar value="#{registerPropertyManagedBean.property.categoriy}" pattern="dd/MM/yyyy"/>
-                
+                <p:outputLabel for="category" value="Categoria" />
+                <p:selectOneMenu id="category" value="#{registerPropertyManagedBean.property.categoriy}" >
+                    <f:selectItem itemLabel="Escolha uma categoria" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{registerPropertyManagedBean.categories}" />
+                </p:selectOneMenu>
                 
 
                                 
@@ -40,27 +42,25 @@ and open the template in the editor.
                 <p:outputLabel for="cep" value="Cep:" />
                 <p:inputMask mask="99999-999" id="cep" value="#{signUpManagedBean.user.adress.cep}" required="true" 
                              validatorMessage="Insira um CEP válido">   
-                     <f:validateRegex pattern="\\d{5}-\\d{3}" for="cep">
-                </inputText>
+                    <f:validateRegex pattern="\\d{5}-\\d{3}" for="cep"></f:validateRegex>
+                </p:inputMask>
                 
                  
                 <p:outputLabel for="street" value="Rua:" />
                 <p:inputText id="street" value="#{signUpManagedBean.user.adress.street}" required="true"/>
                 
-                <p:outputLabel for="numero" value="Número:" />
+                <p:outputLabel for="number" value="Número:" />
                 <p:inputText id="number" value="#{signUpManagedBean.user.adress.number}" required="true" >
                    
                 </p:inputText>
                 
-                <p:outputLabel for="cidade" value="Cidade:" />
+                <p:outputLabel for="city" value="Cidade:" />
                 <p:inputText id="city" value="#{signUpManagedBean.user.adress.city}" required="true"/>          
                 
-                <p:outputLabel for="estado" value="Estado:" />
+                <p:outputLabel for="state" value="Estado:" />
                 <p:inputText id="state"  maxlength="2" value="#{signUpManagedBean.user.adress.state}" required="true"/>      
                 
-                <p:outputLabel for="country" value="Pais" />
-                <p:inputText id="country" value="#{signUpManagedBean.user.adress.country}" required="true"/>                      
-                
+                         
                 <p:outputLabel for="addinfo" value="Additional Info:" />
                 <p:inputText id="addinfo" value="#{signUpManagedBean.user.adress.additionalInfo}" required="true"/>         
                 

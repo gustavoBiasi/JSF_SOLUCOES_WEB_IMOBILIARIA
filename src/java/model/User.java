@@ -18,8 +18,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -35,6 +37,8 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String phone;
+    
+    @Temporal(TemporalType.DATE)
     private Date birthday;
 
     public Date getBirthday() {

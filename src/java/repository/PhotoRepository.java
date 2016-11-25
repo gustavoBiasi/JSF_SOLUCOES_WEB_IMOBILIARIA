@@ -6,7 +6,7 @@
 package repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+
 import model.Photo;
 import utils.EntityManagerSingleton;
 

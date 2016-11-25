@@ -5,11 +5,12 @@
  */
 package model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+
 
 /**
  *
@@ -18,7 +19,7 @@ import javax.persistence.OneToOne;
  */
 //lara: o address estava sem a anotação entity.
 @Entity
-public class Address {
+public class Address implements Serializable{
     @Id
     @Column(name = "address_id")
     //lara, acrescentei o generatedvalue
