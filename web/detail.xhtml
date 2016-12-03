@@ -9,65 +9,95 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Encontrar propriedades - Teste - esse é o botão que vai na lista de propriedades.</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    <h:body>
 
-        <h3>Dados da proprieade</h3>
-        <p:panelGrid columns="2" >
-            <f:facet name="header">
-                <p:row>
-                <p:graphicImage url="http://7606-presscdn-0-74.pagely.netdna-cdn.com/wp-content/uploads/2016/03/Dubai-Photos-Images-Oicture-Dubai-Landmarks-800x600.jpg" />
-                </p:row>
-               
-            </f:facet>
-            
+        <h:head>
+            <title>Encontrar propriedades - Teste - esse é o botão que vai na lista de propriedades.</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+              
 
-            <h:outputText value="Título"  />
-            <h:outputText value="#{propertyDetailManagedBean.property.title}" />               
-            
-             <h:outputText value="Descrição"  />
-             <h:outputText value="#{propertyDetailManagedBean.property.description}" />            
-            
-            <h:outputText value="Quartos" />
-            <h:outputText value="#{propertyDetailManagedBean.property.bedrooms}"  />
-            
-            <h:outputText value="Banheiros" />
-            <h:outputText value="#{propertyDetailManagedBean.property.bathrooms}" />  
-            
-            <h:outputText value="Estacionamento" />
-            <h:outputText value="#{propertyDetailManagedBean.property.parkingSlot} vagas" />  
-            
-            <h:outputText value="À venda" />
-            <h:selectBooleanCheckbox  disabled="true"  value="#{propertyDetailManagedBean.property.isVendible}" />
-            
-            <h:outputText value="Valor venda" />
-            <h:outputText  value="R$ #{propertyDetailManagedBean.property.salePrice}" />
-            
-            
-            <h:outputText value="Disponível para aluguel" />
-            <h:selectBooleanCheckbox  disabled="true"  value="#{propertyDetailManagedBean.property.isRentable}" /> 
-            
-            <h:outputText value="Valor da diária" />
-            <h:outputText  value="R$ #{propertyDetailManagedBean.property.dailyRentPrice}" />
-            
-             <h:outputText value="Endereço" />
-             <h:outputText  value="#{propertyDetailManagedBean.property.address.street}, 
-                            #{propertyDetailManagedBean.property.address.number}. 
-                            CEP:#{propertyDetailManagedBean.property.address.cep}. 
-                            #{propertyDetailManagedBean.property.address.district} -
-                            #{propertyDetailManagedBean.property.address.city},
-                            #{propertyDetailManagedBean.property.address.state}." />
-             
-             
-                  <h:outputText value="Proprietário" />
-                  <h:outputText  value="#{propertyDetailManagedBean.property.owner.name}.
-                                 #{propertyDetailManagedBean.property.owner.email}. 
-                                 Tel.:#{propertyDetailManagedBean.property.owner.phone}
-                           " />
-                     
-        </p:panelGrid>
-    </h:body>
+        </h:head><h3> Dados da proprieade</h3>
+        <h:body>
+            <p:panelGrid columns="2" style="width: 100%; border:none;" >
+                <p:carousel numVisible="1" effect="easeInStrong" circular="false" style="padding-left: 50px">
+                    <p:tab title="I">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage url="http://7606-presscdn-0-74.pagely.netdna-cdn.com/wp-content/uploads/2016/03/Dubai-Photos-Images-Oicture-Dubai-Landmarks-800x600.jpg" width="1000px" height="400px"/>
+
+                        </h:panelGrid>
+                    </p:tab>px;
+                    <p:tab title="II">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage url="https://a1.muscache.com/im/pictures/10026520/717f5adc_original.jpg?aki_policy=large" width="1000px" height="400px" />                            
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="III">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage url="https://a1.muscache.com/im/pictures/10026520/717f5adc_original.jpg?aki_policy=large" width="1000px" height="400px"/>                            
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="IV">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage url="https://a1.muscache.com/im/pictures/10026520/717f5adc_original.jpg?aki_policy=large"  width="1000px" height="400px"/>                            
+                        </h:panelGrid>
+                    </p:tab>
+
+
+                </p:carousel>
+            </p:panelGrid>
+             <p:panelGrid columns="2" style="width: 100%">
+                <f:facet name="header">
+                    <!--  <p:row>
+                          <p:graphicImage url="http://7606-presscdn-0-74.pagely.netdna-cdn.com/wp-content/uploads/2016/03/Dubai-Photos-Images-Oicture-Dubai-Landmarks-800x600.jpg"  />
+                      </p:row>-->
+
+
+                </f:facet>
+
+
+
+                <h:outputText value="Título"  />
+                <h:outputText value="#{propertyDetailManagedBean.property.title}" />               
+
+                <h:outputText value="Descrição"  />
+                <h:outputText value="#{propertyDetailManagedBean.property.description}" />            
+
+                <h:outputText value="Quartos" />
+                <h:outputText value="#{propertyDetailManagedBean.property.bedrooms}"  />
+
+                <h:outputText value="Banheiros" />
+                <h:outputText value="#{propertyDetailManagedBean.property.bathrooms}" />  
+
+                <h:outputText value="Estacionamento" />
+                <h:outputText value="#{propertyDetailManagedBean.property.parkingSlot} vagas" />  
+
+                <h:outputText value="À venda" />
+                <h:selectBooleanCheckbox  disabled="true"  value="#{propertyDetailManagedBean.property.isVendible}" />
+
+                <h:outputText value="Valor venda" />
+                <h:outputText  value="R$ #{propertyDetailManagedBean.property.salePrice}" />
+
+
+                <h:outputText value="Disponível para aluguel" />
+                <h:selectBooleanCheckbox  disabled="true"  value="#{propertyDetailManagedBean.property.isRentable}" /> 
+
+                <h:outputText value="Valor da diária" />
+                <h:outputText  value="R$ #{propertyDetailManagedBean.property.dailyRentPrice}" />
+
+                <h:outputText value="Endereço" />
+                <h:outputText  value="#{propertyDetailManagedBean.property.address.street}, 
+                               #{propertyDetailManagedBean.property.address.number}. 
+                               CEP:#{propertyDetailManagedBean.property.address.cep}. 
+                               #{propertyDetailManagedBean.property.address.district} -
+                               #{propertyDetailManagedBean.property.address.city},
+                               #{propertyDetailManagedBean.property.address.state}." />
+
+
+                <h:outputText value="Proprietário" />
+                <h:outputText  value="#{propertyDetailManagedBean.property.owner.name}.
+                               #{propertyDetailManagedBean.property.owner.email}. 
+                               Tel.:#{propertyDetailManagedBean.property.owner.phone}
+                               " />
+
+            </p:panelGrid>
+        </h:body>
 </html>
