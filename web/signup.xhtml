@@ -32,10 +32,10 @@ and open the template in the editor.
              
                  
                 <p:outputLabel for="cep" value="Cep:" />
-                <p:inputMask mask="99999-999" id="cep" value="#{signUpManagedBean.user.adress.cep}" required="true" 
+                <p:inputMask mask="99999-999" id="cep" value="#{signUpManagedBean.user.adress.cep}" valueChangeListener="#{signUpManagedBean.refreshCep}" required="true" 
                              validatorMessage="Insira um CEP válido">   
                     <f:validateRegex pattern="\\d{5}-\\d{3}" for="cep"> </f:validateRegex>
-                    <p:ajax event="keyup" listener="#{signUpManagedBean.refreshCep}" />
+                    <p:ajax  listener="#{signUpManagedBean.refreshCep}" />
                 </p:inputMask>
                 
                  

@@ -15,6 +15,7 @@ import model.Property;
 import model.User;
 import repository.PropertyRepository;
 import repository.UserRepository;
+import utils.SessionUtils;
 
 /**
  *
@@ -33,9 +34,8 @@ public class MainManagedBean {
     @PostConstruct
     public void init()
     {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        user = userRepository.getUser(Integer.parseInt(session.getAttribute("userId").toString()));
+
+        user = userRepository.getUser(Integer.parseInt(SessionUtils.getUserId()));
         allProperties = propertyRepository.findAllPropertiesNotOwned(user.getId());
         favoriteProperties = propertyRepository.findAllFavoritedProperties(user.getId());
         

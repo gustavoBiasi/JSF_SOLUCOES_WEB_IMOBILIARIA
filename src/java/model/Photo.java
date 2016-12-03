@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ import javax.persistence.ManyToOne;
  * @author Gustavo
  */
 @Entity
-public class Photo implements java.io.Serializable {
+public class Photo implements Serializable {
     @Id
     @GeneratedValue
     @Column(name="photo_id")

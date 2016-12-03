@@ -5,10 +5,12 @@
  */
 package managedbeans;
 
+import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 
 import model.User;
 import repository.UserRepository;
@@ -20,7 +22,7 @@ import services.CepService;
  */
 @ViewScoped
 @ManagedBean
-public class SignUpManagedBean {
+public class SignUpManagedBean implements Serializable{
     User user = new User();
   
     
@@ -51,8 +53,9 @@ public class SignUpManagedBean {
     
     public void refreshCep()
     {
+           System.out.println("blaaaaaaaaaaaaaaaaaaa");
            CepService cepService = new CepService(user.getAdress().getCep());
-           System.out.println("managedbeans.SignUpManagedBean.refreshCep()");
+          
            if(cepService.getSuccess() == 0)
            {
                FacesContext.getCurrentInstance().addMessage(

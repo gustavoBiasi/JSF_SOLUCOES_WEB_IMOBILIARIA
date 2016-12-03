@@ -5,6 +5,7 @@
  */
 package repository;
 
+import java.io.Serializable;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -15,7 +16,7 @@ import utils.EntityManagerSingleton;
  *
  * @author Lara
  */
-public class UserRepository {
+public class UserRepository implements Serializable{
     private EntityManager manager;
     
     public UserRepository(){

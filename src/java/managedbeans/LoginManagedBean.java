@@ -14,8 +14,10 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import model.User;
+
 import repository.PropertyRepository;
 import repository.UserRepository;
+import utils.SessionUtils;
 
 /**
  *
@@ -48,10 +50,10 @@ public class LoginManagedBean {
         else 
         {
             // Armazenando o login do usuario na Sessao
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-            session.setAttribute("login", user.getEmail());
-            session.setAttribute("userId", user.getId());
+            
+            HttpSession session = SessionUtils.getSession();
+            session.setAttribute("username", user.getEmail());
+            session.setAttribute("userid", user.getId());
             return "/main";
         }
     

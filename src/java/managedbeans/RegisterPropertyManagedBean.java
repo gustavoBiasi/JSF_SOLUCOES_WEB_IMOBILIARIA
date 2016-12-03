@@ -5,6 +5,7 @@
  */
 package managedbeans;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,12 +14,16 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import model.Category;
 
 import model.Property;
 import repository.CategoryRepository;
 
 import repository.PropertyRepository;
+import utils.SessionUtils;
+import utils.UploadFileUtil;
 
 
 /**
@@ -34,6 +39,9 @@ public class RegisterPropertyManagedBean {
     PropertyRepository propertyRepository = new PropertyRepository();
     private Map<Long,String> categories;
     
+    
+    private List<Part> photos = new ArrayList<Part>();
+    private Part currentPhoto;
     @PostConstruct
     public void init()
     {
@@ -77,5 +85,26 @@ public class RegisterPropertyManagedBean {
     {
    
 
+    }
+    
+    public void addPhoto()
+    {
+        if(currentPhoto != null)
+        {
+            photos.add(currentPhoto);
+            currentPhoto = null;
+        }
+    }
+    
+    public void send()
+    {
+       
+        
+        // salva fotos
+        for(Part photo : photos)
+        {
+            
+            UploadFileUtil.upload(photo, SessionUtils.getUserId());
+        }
     }
 }

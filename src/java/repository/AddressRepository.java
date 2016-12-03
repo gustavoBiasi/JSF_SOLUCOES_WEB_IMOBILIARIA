@@ -5,6 +5,7 @@
  */
 package repository;
 
+import java.io.Serializable;
 import javax.persistence.EntityManager;
 import model.Address;
 
@@ -12,7 +13,7 @@ import model.Address;
  *
  * @author Lara
  */
-public class AddressRepository {
+public class AddressRepository implements Serializable{
     private EntityManager manager;
     
     public AddressRepository(EntityManager manager){

@@ -5,6 +5,7 @@
  */
 package repository;
 
+import java.io.Serializable;
 import javax.persistence.EntityManager;
 
 import model.Photo;
@@ -14,7 +15,7 @@ import utils.EntityManagerSingleton;
  *
  * @author Lara
  */
-public class PhotoRepository {
+public class PhotoRepository implements Serializable{
     private EntityManager manager;
     public PhotoRepository(){
         this.manager = EntityManagerSingleton.getEntityManager();
