@@ -38,7 +38,7 @@ public class GeraTabelas {
         property.setIsVendible(false);
         User user = new User();
         user.setName("Lara");
-        user.setEmail("testeATteste.com");
+        user.setEmail("teste@teste.com");
         user.setPassword("teste");
         user.setPhone("(22)9999-9999");
         property.setOwner(user);
@@ -51,7 +51,8 @@ public class GeraTabelas {
         address.setDistrict("Jardins Solitários");
         address.setAdditionalInfo("Quarteirao 202");
         address.setNumber("9");
-        property.setAddress(address);     
+        property.setAddress(address); 
+        property.setDescription("Casa n praia, ótima localização. Beira mar e brisa leve.");
         PropertyRepository propertyrepository=new PropertyRepository();
         propertyrepository.addProperty(property);
         System.out.println("salvando propriedade");
