@@ -64,5 +64,24 @@ public class PropertyRepository implements Serializable{
         
     }
     
+    public List<Property> findAllProperties(){
+        try{
+            Query query=manager.createQuery("select prop from Property p");
+            return query.getResultList();
+            
+        }catch(NoResultException ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
     
+    public Property getById(Integer id){
+        try{
+            return this.manager.find(Property.class, id);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }
