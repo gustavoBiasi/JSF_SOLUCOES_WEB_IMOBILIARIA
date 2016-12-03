@@ -59,7 +59,7 @@ public class Property implements Serializable{
     private Integer bedrooms;
     private Integer parkingSlot;
     
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     private Category category;
     
     @OneToMany

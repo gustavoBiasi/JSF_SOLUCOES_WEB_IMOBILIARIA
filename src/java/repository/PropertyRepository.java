@@ -26,10 +26,15 @@ public class PropertyRepository implements Serializable{
     
     public boolean addProperty(Property property){
         try{
+            this.manager.getTransaction().begin();
+            System.out.println("salvando propriedade sucesso");
             this.manager.persist(property);
+            this.manager.flush();
+            this.manager.getTransaction().commit();
             return true;
         }catch(Exception e)
         {
+            System.out.println("salvando falha propriedade");
             e.printStackTrace();
             return false;
         }
