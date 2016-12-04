@@ -5,7 +5,13 @@
  */
 package services;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.Iterator;
 
 import org.dom4j.Document;
@@ -76,15 +82,13 @@ public class CepService {
     public CepService(String cep) {
         
         try {
-            URL url = new URL(
-                    "https://viacep.com.br/ws/" + cep
-                            + "/json/");
+            String url = 
+                    "http://viacep.com.br/ws/" + cep
+                            + "/json/";
  
-            Document document = getDocumento(url);
+            JSONObject json = getDocumento(url);
  
-            Element root = document.getRootElement();
- 
-            JSONObject json = new JSONObject(document);
+           
             
             try{
                 this.city = json.get("localidade").toString();
@@ -105,10 +109,30 @@ public class CepService {
         }
     }
  
-    public Document getDocumento(URL url) throws DocumentException {
-        SAXReader reader = new SAXReader();
-        Document document = reader.read(url);
- 
-        return document;
+    public JSONObject getDocumento(String url) throws DocumentException, IOException {
+        InputStream is = new URL(url).openStream();
+        try {
+          BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.defaultCharset().forName("UTF-8")));
+          String jsonText = readAll(rd);
+          JSONObject json = new JSONObject(jsonText);
+          is.close();
+          return json;
+        }catch(Exception e) 
+        {
+            e.printStackTrace();
+            is.close();
+        }
+        return null;
     }
+    
+
+    private static String readAll(Reader rd) throws IOException {
+      StringBuilder sb = new StringBuilder();
+      int cp;
+      while ((cp = rd.read()) != -1) {
+        sb.append((char) cp);
+      }
+      return sb.toString();
+    }
+
 }

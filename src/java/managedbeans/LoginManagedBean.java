@@ -7,6 +7,7 @@ package managedbeans;
 
 
 
+import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -25,7 +26,7 @@ import utils.SessionUtils;
  */
 @ManagedBean
 @ViewScoped
-public class LoginManagedBean {
+public class LoginManagedBean implements Serializable{
     
     private UserRepository userRepository = new UserRepository();
     private User user = new User();

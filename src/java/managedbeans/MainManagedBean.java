@@ -5,6 +5,7 @@
  */
 package managedbeans;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -23,7 +24,7 @@ import utils.SessionUtils;
  */
 @ManagedBean
 @ViewScoped
-public class MainManagedBean {
+public class MainManagedBean implements Serializable{
     private UserRepository userRepository = new UserRepository();
     private PropertyRepository propertyRepository = new PropertyRepository();
     private User user = new User();

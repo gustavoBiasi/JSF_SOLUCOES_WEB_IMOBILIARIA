@@ -19,6 +19,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -29,14 +30,15 @@ public class UploadFileUtil {
     
     
 
-    public static Path upload(Part file, String userId)
+    public static Path upload(UploadedFile file, String folder)
     {
         Path path;
         SecureRandom random = new SecureRandom();
         
-       try(InputStream input = file.getInputStream())
+       try(InputStream input = file.getInputstream())
        {
-           path = new File(userId, file.getName().substring(0, 32) + new BigInteger(130, random).toString(32)).toPath();
+           String fileType =  file.getFileName().substring(file.getFileName().length()-5, file.getFileName().length()-1);
+           path = new File(folder, file.getFileName().substring(0, 32) + new BigInteger(130, random).toString(32) + fileType).toPath();
            Files.copy(input, path);
        }
        catch(IOException e)

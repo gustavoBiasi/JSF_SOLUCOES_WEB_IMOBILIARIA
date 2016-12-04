@@ -17,14 +17,23 @@ and open the template in the editor.
         <h:form>
             <p:messages id="messages" />
             <p:panelGrid columns="2">
+                
+                
                 <p:outputLabel for="title" value="Titulo:" />
                 <p:inputText id="title"  maxlength="100" value="#{registerPropertyManagedBean.property.title}" required="true" />
-                
+          
+                <h:outputText value="Para venda: " />
+                <p:selectBooleanCheckbox value="#{registerPropertyManagedBean.property.isVendible}">
+                   <p:ajax event="change" update="salePrice" />
+                </p:selectBooleanCheckbox>
                 <p:outputLabel for="salePrice" value="Preço de venda:" />
-                <p:inputText id="salePrice"  value="#{registerPropertyManagedBean.property.salePrice}"  />
-
+                <p:inputText id="salePrice" disabled="#{!registerPropertyManagedBean.property.isVendible}" value="#{registerPropertyManagedBean.property.salePrice}" required="true" />
+                <h:outputText value="Para alugar: " />
+                <p:selectBooleanCheckbox value="#{registerPropertyManagedBean.property.isRentable}" >
+                    <p:ajax event="change" update="dailyRentPrice" />
+                </p:selectBooleanCheckbox>
                 <p:outputLabel for="dailyRentPrice" value="Aluguel Diário:" />
-                <p:inputText id="dailyRentPrice"   value="#{registerPropertyManagedBean.property.dailyRentPrice}"  />
+                <p:inputText id="dailyRentPrice"  disabled="#{!registerPropertyManagedBean.property.isRentable}" value="#{registerPropertyManagedBean.property.dailyRentPrice}" required="true"  />
                 
                 <p:outputLabel for="category" value="Categoria" />
                 <p:selectOneMenu id="category" value="#{registerPropertyManagedBean.property.categoriy}" >
@@ -32,39 +41,56 @@ and open the template in the editor.
                     <f:selectItems value="#{registerPropertyManagedBean.categories}" />
                 </p:selectOneMenu>
                 
-
+                <p:dataList id="photosList" value="#{registerPropertyManagedBean.photos}" var="photo" type="ordered">
+                       <f:facet name="header">
+                           Fotos
+                       </f:facet>
+                       #{photo.fileName.toString()}
+                </p:dataList>
+                <p:fileUpload fileUploadListener="#{registerPropertyManagedBean.addPhoto}"  update="photosList" mode="advanced" dragDropSupport="false"
+                              multiple="true" sizeLimit="5000000" fileLimit="5" allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
+                        
+                </p:fileUpload>
+                              
+                
+                     
+                     
+            
+                  
                                 
                 <p:outputLabel for="phone" value="Telefone:" />
-                <p:inputMask id="phone" mask="999-999999999"  value="#{signUpManagedBean.user.phone}" required="true" />
+                <p:inputMask id="phone" mask="999-999999999"  value="#{registerPropertyManagedBean.property.phone}" required="true" />
                    
              
                  
                 <p:outputLabel for="cep" value="Cep:" />
-                <p:inputMask mask="99999-999" id="cep" value="#{signUpManagedBean.user.adress.cep}" required="true" 
-                             validatorMessage="Insira um CEP válido">   
-                    <f:validateRegex pattern="\\d{5}-\\d{3}" for="cep"></f:validateRegex>
-                </p:inputMask>
                 
+                
+                <p:inputText  id="cep" value="#{registerPropertyManagedBean.cep}"  required="true" 
+                             validatorMessage="Insira um CEP válido">   
+                   <f:validateRegex pattern="\\d{5}-\\d{3}" for="cep"></f:validateRegex>
+                    <p:ajax   event="keyup" update="street, city, state, cep" listener="#{registerPropertyManagedBean.refreshCep}" />
+                </p:inputText>                
                  
                 <p:outputLabel for="street" value="Rua:" />
-                <p:inputText id="street" value="#{signUpManagedBean.user.adress.street}" required="true"/>
+                <p:inputText id="street" value="#{registerPropertyManagedBean.property.adress.street}" required="true"/>
                 
                 <p:outputLabel for="number" value="Número:" />
-                <p:inputText id="number" value="#{signUpManagedBean.user.adress.number}" required="true" >
+                <p:inputText id="number" value="#{registerPropertyManagedBean.property.adress.number}" required="true" >
                    
                 </p:inputText>
                 
                 <p:outputLabel for="city" value="Cidade:" />
-                <p:inputText id="city" value="#{signUpManagedBean.user.adress.city}" required="true"/>          
+                <p:inputText id="city" value="#{registerPropertyManagedBean.property.adress.city}" required="true"/>          
                 
                 <p:outputLabel for="state" value="Estado:" />
-                <p:inputText id="state"  maxlength="2" value="#{signUpManagedBean.user.adress.state}" required="true"/>      
+                <p:inputText id="state"  maxlength="2" value="#{registerPropertyManagedBean.property.adress.state}" required="true"/>      
                 
                          
                 <p:outputLabel for="addinfo" value="Additional Info:" />
-                <p:inputText id="addinfo" value="#{signUpManagedBean.user.adress.additionalInfo}" required="true"/>         
+                <p:inputText id="addinfo" value="#{registerPropertyManagedBean.property.adress.additionalInfo}" required="true"/>         
                 
-                <p:commandButton value="Prosseguir" icon="ui-icon-check"  action="#{signUpManagedBean.createUser}" ajax="false">
+                <p:commandButton value="Prosseguir" icon="ui-icon-check"  action="#{registerPropertyManagedBean.createProperty()}" ajax="false">
                 </p:commandButton>
                 
             </p:panelGrid>

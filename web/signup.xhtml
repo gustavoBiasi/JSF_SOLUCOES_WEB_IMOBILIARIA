@@ -14,7 +14,9 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+      
         <h:form id="signup">
+            
             <p:messages id="messages" />
             <p:panelGrid columns="2">
                 <p:outputLabel for="userName" value="Nome:" />
@@ -28,15 +30,15 @@ and open the template in the editor.
                                 
                 <p:outputLabel for="phone" value="Telefone:" />
                 <p:inputMask id="phone" mask="999-999999999"  value="#{signUpManagedBean.user.phone}" required="true" />
-                   
+               
              
                  
                 <p:outputLabel for="cep" value="Cep:" />
-                <p:inputMask mask="99999-999" id="cep" value="#{signUpManagedBean.user.adress.cep}" valueChangeListener="#{signUpManagedBean.refreshCep}" required="true" 
+                <p:inputText  id="cep" value="#{signUpManagedBean.cep}"  required="true" 
                              validatorMessage="Insira um CEP válido">   
-                    <f:validateRegex pattern="\\d{5}-\\d{3}" for="cep"> </f:validateRegex>
-                    <p:ajax  listener="#{signUpManagedBean.refreshCep}" />
-                </p:inputMask>
+                   <f:validateRegex pattern="\\d{5}-\\d{3}" for="cep"></f:validateRegex>
+                    <p:ajax   event="keyup" update="street, city, state, cep" listener="#{signUpManagedBean.refreshCep}" />
+                </p:inputText>
                 
                  
                 <p:outputLabel for="street" value="Rua:" />

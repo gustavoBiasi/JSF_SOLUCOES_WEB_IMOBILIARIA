@@ -5,6 +5,7 @@
  */
 package managedbeans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +18,12 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import model.Category;
+import model.Photo;
 
 import model.Property;
+import model.User;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 import repository.CategoryRepository;
 
 import repository.PropertyRepository;
@@ -32,16 +37,32 @@ import utils.UploadFileUtil;
  */
 @ViewScoped
 @ManagedBean
-public class RegisterPropertyManagedBean {
+public class RegisterPropertyManagedBean implements Serializable {
     Property property = new Property();
     CategoryRepository categoryRepository = new CategoryRepository();
     
     PropertyRepository propertyRepository = new PropertyRepository();
     private Map<Long,String> categories;
     
+    private String addedPhotos = null;
     
-    private List<Part> photos = new ArrayList<Part>();
-    private Part currentPhoto;
+    private List<UploadedFile> photos = new ArrayList<UploadedFile>();
+    private String cep = "";
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+     
+    public String getAddedPhotos() {
+        return addedPhotos;
+    }
+    
+    
+    
     @PostConstruct
     public void init()
     {
@@ -66,10 +87,17 @@ public class RegisterPropertyManagedBean {
         this.property = property;
     }
     
-    public String createUser()
+    public String createProperty()
     {
         if(property != null  )
         {
+            for(UploadedFile photo : photos)
+            {
+            
+                property.getPhotos().add(new Photo(UploadFileUtil.upload(photo, SessionUtils.getUserId())));
+            
+            }
+        
             
             propertyRepository.addProperty(property);
             property = new Property();
@@ -77,34 +105,37 @@ public class RegisterPropertyManagedBean {
         }
         FacesContext.getCurrentInstance().addMessage(
                     null, 
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email já registrado", "Ocorreu um erro!"));
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Verifique sua conexão", "Ocorreu um erro!"));
         return null;
     }
     
-    public void getAddressDetail()
+
+    
+    public void addPhoto(FileUploadEvent event)
     {
-   
+
+        photos.add(event.getFile());
+        
+        
 
     }
-    
-    public void addPhoto()
-    {
-        if(currentPhoto != null)
-        {
-            photos.add(currentPhoto);
-            currentPhoto = null;
-        }
+
+    public List<UploadedFile> getPhotos() {
+        return photos;
     }
+
+    public void setPhotos(List<UploadedFile> photos) {
+        this.photos = photos;
+    }
+
+   
+  
     
-    public void send()
+    public void displayErrorMessage(String message)
     {
-       
+                FacesContext.getCurrentInstance().addMessage(
+                    null, 
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "Ocorreu um erro!"));
         
-        // salva fotos
-        for(Part photo : photos)
-        {
-            
-            UploadFileUtil.upload(photo, SessionUtils.getUserId());
-        }
     }
 }
