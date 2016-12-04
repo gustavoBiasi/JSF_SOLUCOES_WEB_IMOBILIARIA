@@ -17,7 +17,7 @@ and open the template in the editor.
         <h:form>
             <h:commandButton action="#{propertyDetailManagedBean.detailAction}" value="encontrar" >
                 <f:setPropertyActionListener target="#{propertyDetailManagedBean.id}" value="1" />
-                
+                 <f:viewParam name="id" value="1" />
             </h:commandButton>
 
         </h:form>    

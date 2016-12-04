@@ -11,13 +11,15 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title>Encontrar propriedades - Teste - esse é o botão que vai na lista de propriedades.</title>
+        <title>Detalhes #{propertyDetailManagedBean.property.title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 
-    </h:head><h3> Dados da propriedade</h3>
+    </h:head><h3> #{propertyDetailManagedBean.property.title}</h3>
     <h:body>
-
+    <f:metadata>
+        <f:viewParam name="id" value="#{propertyDetailManagedBean.id}" />
+    </f:metadata>
       <!-- <p:carousel numVisible="1" effect="easeInStrong" circular="true" style="padding-left: 50px; width:100%" responsive="true">-->
       <p:carousel numVisible="1" effect="easeInStrong" circular="true" responsive="true">
 
@@ -52,7 +54,7 @@ and open the template in the editor.
 
 
             <h:outputText value="Título"  />
-            <h:outputText value="#{propertyDetailManagedBean.property.title}" />               
+            <h:outputText value="#{propertyDetailManagedBean.property.title}" />    
 
             <h:outputText value="Descrição"  />
             <h:outputText value="#{propertyDetailManagedBean.property.description}" />            
@@ -88,9 +90,9 @@ and open the template in the editor.
                            #{propertyDetailManagedBean.property.address.state}." />
 
 
-            <h:outputText value="Proprietário" />
-            <h:outputText  value="#{propertyDetailManagedBean.property.owner.name}.
-                           #{propertyDetailManagedBean.property.owner.email}. 
+            <h:outputText value="Contato:" />
+            <h:outputText  value="Falar com #{propertyDetailManagedBean.property.owner.name}.                           
+                           E-mail: #{propertyDetailManagedBean.property.owner.email}. 
                            Tel.:#{propertyDetailManagedBean.property.owner.phone}
                            " />
 
