@@ -27,6 +27,7 @@ import org.primefaces.model.UploadedFile;
 import repository.CategoryRepository;
 
 import repository.PropertyRepository;
+import services.CepService;
 import utils.SessionUtils;
 import utils.UploadFileUtil;
 
@@ -127,7 +128,32 @@ public class RegisterPropertyManagedBean implements Serializable {
     public void setPhotos(List<UploadedFile> photos) {
         this.photos = photos;
     }
+    public void refreshCep()
+    {
 
+             if(this.cep.equals("")) return;
+              CepService cepService = new CepService(this.cep);
+
+              if(cepService.getSuccess() == 0)
+              {
+
+                  FacesContext.getCurrentInstance().addMessage(
+                       null, 
+                       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cep Inválido", "Ocorreu um erro!"));
+              }
+              else
+              {
+
+                   property.getAddress().setCity(cepService.getCity());
+                   property.getAddress().setDistrict(cepService.getDistrict());
+                   property.getAddress().setState(cepService.getState());
+                   property.getAddress().setStreet(cepService.getStreet());
+                   property.getAddress().setCep(cep);
+              }
+
+
+
+    }
    
   
     

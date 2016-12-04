@@ -36,8 +36,8 @@ and open the template in the editor.
                 <p:outputLabel for="cep" value="Cep:" />
                 <p:inputText  id="cep" value="#{signUpManagedBean.cep}"  required="true" 
                              validatorMessage="Insira um CEP válido">   
-                   <f:validateRegex pattern="\\d{5}-\\d{3}" for="cep"></f:validateRegex>
-                    <p:ajax   event="keyup" update="street, city, state, cep" listener="#{signUpManagedBean.refreshCep}" />
+                  <f:validateRegex pattern="\\d{5}-\\d{3}" for="cep"></f:validateRegex>
+                    <p:ajax   event="blur" update="street, city, state, cep" listener="#{signUpManagedBean.refreshCep}" />
                 </p:inputText>
                 
                  
@@ -63,5 +63,7 @@ and open the template in the editor.
                 
             </p:panelGrid>
         </h:form>
+ 
+        
     </h:body>
 </html>

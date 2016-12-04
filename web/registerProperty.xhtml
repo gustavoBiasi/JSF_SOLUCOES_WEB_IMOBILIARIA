@@ -52,16 +52,6 @@ and open the template in the editor.
                         
                 </p:fileUpload>
                               
-                
-                     
-                     
-            
-                  
-                                
-                <p:outputLabel for="phone" value="Telefone:" />
-                <p:inputMask id="phone" mask="999-999999999"  value="#{registerPropertyManagedBean.property.phone}" required="true" />
-                   
-             
                  
                 <p:outputLabel for="cep" value="Cep:" />
                 
@@ -73,22 +63,22 @@ and open the template in the editor.
                 </p:inputText>                
                  
                 <p:outputLabel for="street" value="Rua:" />
-                <p:inputText id="street" value="#{registerPropertyManagedBean.property.adress.street}" required="true"/>
+                <p:inputText id="street" value="#{registerPropertyManagedBean.property.address.street}" required="true"/>
                 
                 <p:outputLabel for="number" value="Número:" />
-                <p:inputText id="number" value="#{registerPropertyManagedBean.property.adress.number}" required="true" >
+                <p:inputText id="number" value="#{registerPropertyManagedBean.property.address.number}" required="true" >
                    
                 </p:inputText>
                 
                 <p:outputLabel for="city" value="Cidade:" />
-                <p:inputText id="city" value="#{registerPropertyManagedBean.property.adress.city}" required="true"/>          
+                <p:inputText id="city" value="#{registerPropertyManagedBean.property.address.city}" disabled="true"  required="true"/>          
                 
                 <p:outputLabel for="state" value="Estado:" />
-                <p:inputText id="state"  maxlength="2" value="#{registerPropertyManagedBean.property.adress.state}" required="true"/>      
+                <p:inputText id="state"  maxlength="2" value="#{registerPropertyManagedBean.property.address.state}" disabled="true" required="true"/>      
                 
                          
                 <p:outputLabel for="addinfo" value="Additional Info:" />
-                <p:inputText id="addinfo" value="#{registerPropertyManagedBean.property.adress.additionalInfo}" required="true"/>         
+                <p:inputText id="addinfo" value="#{registerPropertyManagedBean.property.address.additionalInfo}" required="true"/>         
                 
                 <p:commandButton value="Prosseguir" icon="ui-icon-check"  action="#{registerPropertyManagedBean.createProperty()}" ajax="false">
                 </p:commandButton>

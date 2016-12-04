@@ -25,7 +25,7 @@ import org.primefaces.model.map.Marker;
  * @author Lara
  */
 @ManagedBean
-
+@RequestScoped
 public class PropertyDetailManagedBean implements Serializable {
 
     private MapModel geoModel;
@@ -68,7 +68,7 @@ public class PropertyDetailManagedBean implements Serializable {
     
     public void onGeocode(GeocodeEvent event) {
            List<GeocodeResult> results = event.getResults();
-           System.out.println("baaaaaaaaala");
+           
         if (results != null && !results.isEmpty()) {
             LatLng center = results.get(0).getLatLng();
             centerGeoMap = center.getLat() + "," + center.getLng();
