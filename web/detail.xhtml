@@ -10,114 +10,117 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-        <h:head>
-            <title>Encontrar propriedades - Teste - esse é o botão que vai na lista de propriedades.</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-              
-
-        </h:head><h3> Dados da proprieade</h3>
-        <h:body>
-           
-                <p:carousel numVisible="1" effect="easeInStrong" circular="true" style="padding-left: 50px; width:100%" responsive="true">
-
-                    
-                        <h:panelGrid columns="1" cellpadding="10">
-                            <p:graphicImage url="http://7606-presscdn-0-74.pagely.netdna-cdn.com/wp-content/uploads/2016/03/Dubai-Photos-Images-Oicture-Dubai-Landmarks-800x600.jpg" width="1000px" height="400px"/>
-
-                        </h:panelGrid>
-                    
-                   
-                        <h:panelGrid columns="1" cellpadding="10">
-                            <p:graphicImage url="https://a1.muscache.com/im/pictures/10026520/717f5adc_original.jpg?aki_policy=large" width="1000px" height="400px" />                            
-                        </h:panelGrid>
-                   
-                    
-                        <h:panelGrid columns="1" cellpadding="10">
-                            <p:graphicImage url="https://a1.muscache.com/im/pictures/10026520/717f5adc_original.jpg?aki_policy=large" width="1000px" height="400px"/>                            
-                        </h:panelGrid>
-                   
-                    
-                        <h:panelGrid columns="1" cellpadding="10">
-                            <p:graphicImage url="https://a1.muscache.com/im/pictures/10026520/717f5adc_original.jpg?aki_policy=large"  width="1000px" height="400px"/>                            
-                        </h:panelGrid>
-                 
+    <h:head>
+        <title>Encontrar propriedades - Teste - esse é o botão que vai na lista de propriedades.</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 
-                </p:carousel>
-           
-             <p:panelGrid  columns="2" style="width: 100%">
-           
+    </h:head><h3> Dados da propriedade</h3>
+    <h:body>
 
-                    
-                  
-                <h:outputText value="Título"  />
-                <h:outputText value="#{propertyDetailManagedBean.property.title}" />               
-
-                <h:outputText value="Descrição"  />
-                <h:outputText value="#{propertyDetailManagedBean.property.description}" />            
-
-                <h:outputText value="Quartos" />
-                <h:outputText value="#{propertyDetailManagedBean.property.bedrooms}"  />
-
-                <h:outputText value="Banheiros" />
-                <h:outputText value="#{propertyDetailManagedBean.property.bathrooms}" />  
-
-                <h:outputText value="Estacionamento" />
-                <h:outputText value="#{propertyDetailManagedBean.property.parkingSlot} vagas" />  
-
-                <h:outputText value="À venda" />
-                <h:selectBooleanCheckbox  disabled="true"  value="#{propertyDetailManagedBean.property.isVendible}" />
-
-                <h:outputText value="Valor venda" />
-                <h:outputText  value="R$ #{propertyDetailManagedBean.property.salePrice}" />
+      <!-- <p:carousel numVisible="1" effect="easeInStrong" circular="true" style="padding-left: 50px; width:100%" responsive="true">-->
+        <p:carousel numVisible="1" effect="easeInStrong" circular="true" class="col-md-12" responsive="true">
 
 
-                <h:outputText value="Disponível para aluguel" />
-                <h:selectBooleanCheckbox  disabled="true"  value="#{propertyDetailManagedBean.property.isRentable}" /> 
+            <h:panelGrid columns="1" cellpadding="10">
+                <p:graphicImage url="http://7606-presscdn-0-74.pagely.netdna-cdn.com/wp-content/uploads/2016/03/Dubai-Photos-Images-Oicture-Dubai-Landmarks-800x600.jpg" width="1000px" height="400px"/>
 
-                <h:outputText value="Valor da diária" />
-                <h:outputText  value="R$ #{propertyDetailManagedBean.property.dailyRentPrice}" />
-
-                <h:outputText value="Endereço" />
-                <h:outputText  value="#{propertyDetailManagedBean.property.address.street}, 
-                               #{propertyDetailManagedBean.property.address.number}. 
-                               CEP:#{propertyDetailManagedBean.property.address.cep}. 
-                               #{propertyDetailManagedBean.property.address.district} -
-                               #{propertyDetailManagedBean.property.address.city},
-                               #{propertyDetailManagedBean.property.address.state}." />
+            </h:panelGrid>
 
 
-                <h:outputText value="Proprietário" />
-                <h:outputText  value="#{propertyDetailManagedBean.property.owner.name}.
-                               #{propertyDetailManagedBean.property.owner.email}. 
-                               Tel.:#{propertyDetailManagedBean.property.owner.phone}
-                               " />
+            <h:panelGrid columns="1" cellpadding="10">
+                <p:graphicImage url="https://a1.muscache.com/im/pictures/10026520/717f5adc_original.jpg?aki_policy=large" width="1000px" height="400px" />                            
+            </h:panelGrid>
 
-            </p:panelGrid>
-          <h:form prependId="false">
+
+            <h:panelGrid columns="1" cellpadding="10">
+                <p:graphicImage url="https://a1.muscache.com/im/pictures/10026520/717f5adc_original.jpg?aki_policy=large" width="1000px" height="400px"/>                            
+            </h:panelGrid>
+
+
+            <h:panelGrid columns="1" cellpadding="10">
+                <p:graphicImage url="https://a1.muscache.com/im/pictures/10026520/717f5adc_original.jpg?aki_policy=large"  width="1000px" height="400px"/>                            
+            </h:panelGrid>
+
+
+
+        </p:carousel>
+
+        <p:panelGrid  columns="2" style="width: 100%">
+
+
+
+
+            <h:outputText value="Título"  />
+            <h:outputText value="#{propertyDetailManagedBean.property.title}" />               
+
+            <h:outputText value="Descrição"  />
+            <h:outputText value="#{propertyDetailManagedBean.property.description}" />            
+
+            <h:outputText value="Quartos" />
+            <h:outputText value="#{propertyDetailManagedBean.property.bedrooms}"  />
+
+            <h:outputText value="Banheiros" />
+            <h:outputText value="#{propertyDetailManagedBean.property.bathrooms}" />  
+
+            <h:outputText value="Estacionamento" />
+            <h:outputText value="#{propertyDetailManagedBean.property.parkingSlot} vagas" />  
+
+            <h:outputText value="À venda" />
+            <h:selectBooleanCheckbox  disabled="true"  value="#{propertyDetailManagedBean.property.isVendible}" />
+
+            <h:outputText value="Valor venda" />
+            <h:outputText  value="R$ #{propertyDetailManagedBean.property.salePrice}" />
+
+
+            <h:outputText value="Disponível para aluguel" />
+            <h:selectBooleanCheckbox  disabled="true"  value="#{propertyDetailManagedBean.property.isRentable}" /> 
+
+            <h:outputText value="Valor da diária" />
+            <h:outputText  value="R$ #{propertyDetailManagedBean.property.dailyRentPrice}" />
+
+            <h:outputText value="Endereço" />
+            <h:outputText  value="#{propertyDetailManagedBean.property.address.street}, 
+                           #{propertyDetailManagedBean.property.address.number}. 
+                           CEP:#{propertyDetailManagedBean.property.address.cep}. 
+                           #{propertyDetailManagedBean.property.address.district} -
+                           #{propertyDetailManagedBean.property.address.city},
+                           #{propertyDetailManagedBean.property.address.state}." />
+
+
+            <h:outputText value="Proprietário" />
+            <h:outputText  value="#{propertyDetailManagedBean.property.owner.name}.
+                           #{propertyDetailManagedBean.property.owner.email}. 
+                           Tel.:#{propertyDetailManagedBean.property.owner.phone}
+                           " />
+
+        </p:panelGrid>
+        <h:form prependId="false">
             <p:gmap id="geoGmap" widgetVar="geoMap" model="#{propertyDetailManagedBean.geoModel}" center="#{propertyDetailManagedBean.centerGeoMap}" zoom="15" type="ROADMAP" style="width:100%;height:400px" > 
                 <p:ajax event="geocode" listener="#{propertyDetailManagedBean.onGeocode}" update="@this" />
             </p:gmap>
-            
-          </h:form>
-           
-        </h:body>
-           <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOorlAtwc3ynB9m0G1Er06sRtWukMtWxE"></script>
-            <script type="text/javascript">
 
-              function geocode(){
-                 
-                 var address = "#{propertyDetailManagedBean.property.address.street} #{propertyDetailManagedBean.property.address.number} #{propertyDetailManagedBean.property.address.cep}";
-                 alert(address);
-                 PF('geoMap').geocode(address);
-                 
-              }
-                
-              $(document).ready(function()
-              {
-                  geocode();
-                 
-              });
-           </script>          
-           
+        </h:form>
+
+    </h:body>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOorlAtwc3ynB9m0G1Er06sRtWukMtWxE"></script>
+    <script type="text/javascript">
+
+        function geocode() {
+
+            var address = "#{propertyDetailManagedBean.property.address.street} #{propertyDetailManagedBean.property.address.number} #{propertyDetailManagedBean.property.address.cep}";
+                    //alert(address);
+                    PF('geoMap').geocode(address);
+
+                }
+
+                $(document).ready(function ()
+                {
+                    geocode();
+
+                });
+    </script>          
+
 </html>
