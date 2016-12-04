@@ -107,8 +107,8 @@ and open the template in the editor.
 
               function geocode(){
                  
-                 var address = #{propertyDetailManagedBean.property.address.street} + " " + #{propertyDetailManagedBean.property.address.number} + " " #{propertyDetailManagedBean.property.address.cep};
-                  
+                 var address = "#{propertyDetailManagedBean.property.address.street} #{propertyDetailManagedBean.property.address.number} #{propertyDetailManagedBean.property.address.cep}";
+                 alert(address);
                  PF('geoMap').geocode(address);
                  
               }
