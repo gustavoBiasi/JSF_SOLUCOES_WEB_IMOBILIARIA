@@ -44,12 +44,12 @@ public class GeraTabelas {
         property.setOwner(user);
         property.setSquareMeter(200.00);
         Address address = new Address();
-        address.setCep("00001-201");
+        address.setCep("05201-210");
         address.setCity("São Paulo");
         address.setState("SP");
-        address.setStreet("Rua das acácias");
-        address.setDistrict("Jardins Solitários");
-        address.setAdditionalInfo("Quarteirao 202");
+        address.setStreet("Rua demifonte");
+        address.setDistrict("Perus");
+        address.setAdditionalInfo("Jardim Adelfiore");
         address.setNumber("9");
         property.setAddress(address); 
         property.setDescription("Casa n praia, ótima localização. Beira mar e brisa leve.");

@@ -14,13 +14,10 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        <h:form>
-            <h:commandButton action="#{propertyDetailManagedBean.detailAction}" value="encontrar" >
-                <f:setPropertyActionListener target="#{propertyDetailManagedBean.id}" value="1" />
-                 <f:viewParam name="id" value="1" />
-            </h:commandButton>
-
-        </h:form>    
+         
+        <h:link value="Ver mais detalhes da propriedade 1" outcome="detail" >
+	<f:param name="id" value="1" />
+        </h:link>
 
     </h:body>
 </html>

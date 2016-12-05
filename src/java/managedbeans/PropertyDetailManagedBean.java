@@ -63,8 +63,7 @@ public class PropertyDetailManagedBean implements Serializable {
         geoModel = new DefaultMapModel();
         this.id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
         this.property = propertyRepository.getById(Integer.parseInt(id));
-        //   property = propertyRepository.getById(1);
-
+       
     }
 
     public String getId() {
@@ -101,7 +100,7 @@ public class PropertyDetailManagedBean implements Serializable {
 
     public String detailAction() {
         //now action property contains "delete"
-
+      
         this.property = propertyRepository.getById(Integer.parseInt(id));
         return "detail";
     }
