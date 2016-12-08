@@ -23,14 +23,15 @@ public class UserRepository implements Serializable{
         this.manager = EntityManagerSingleton.getEntityManager();
     }
     
-    public boolean addUser(User user){
+    public Long addUser(User user){
         try{
+            if(!manager.getTransaction().isActive())  manager.getTransaction().begin();
             this.manager.persist(user);
-            return true;
+            return user.getId();
         }catch(Exception e)
         {
             e.printStackTrace();
-            return false;
+            return null;
         }
         
     }
@@ -46,7 +47,7 @@ public class UserRepository implements Serializable{
         
     }
     
-    public User getUser(int userId)
+    public User getUser(Long userId)
     {
         User user = null;
         try{
@@ -65,8 +66,8 @@ public class UserRepository implements Serializable{
             query.setParameter("login", email);
             query.setParameter("password", password);
             
-            return (User) query.getSingleResult();
-        }catch(NoResultException e)
+            return (User) query.getResultList().get(0);
+        }catch(ArrayIndexOutOfBoundsException e)
         {
             return null;
         }

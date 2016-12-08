@@ -23,6 +23,7 @@ public class PhotoRepository implements Serializable{
     public boolean addPhoto(Photo photo){
       
         try{
+            if(!manager.getTransaction().isActive())  manager.getTransaction().begin();
             this.manager.persist(photo);
             return true;
         }catch(Exception e)
@@ -31,8 +32,17 @@ public class PhotoRepository implements Serializable{
             return false;
         }
     }
+        
+    public Photo getById(Long id){
+        try{
+            return this.manager.find(Photo.class, id);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
     
-    
-    // preciso do acesso  bidirecional, ou seja, nas fotos preciso que as propriedades estejam mapeadas
+   
    
 }

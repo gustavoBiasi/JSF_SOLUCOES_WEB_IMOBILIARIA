@@ -54,7 +54,7 @@ public class LoginManagedBean implements Serializable{
             
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("username", user.getEmail());
-            session.setAttribute("userid", user.getId());
+            session.setAttribute("userid", user.getId().toString());
             return "/main";
         }
     

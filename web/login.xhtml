@@ -23,9 +23,10 @@ and open the template in the editor.
                 <p:outputLabel for="password" value="Senha:" />
                 <p:password id="password" value="#{loginManagedBean.user.password}" required="true"/>
                            
-                <p:commandButton value="Enviar" icon="ui-icon-star" action="#{loginManagedBean.send}" ajax="false">
+                <p:commandButton value="Login" icon="ui-icon-check" action="#{loginManagedBean.send}" ajax="false">
                 </p:commandButton>
                 
+                <p:button value="Cadastrar-se" outcome="public/signup"  icon="ui-icon-info" ></p:button>
             </p:panelGrid>
         </h:form>
     </h:body>

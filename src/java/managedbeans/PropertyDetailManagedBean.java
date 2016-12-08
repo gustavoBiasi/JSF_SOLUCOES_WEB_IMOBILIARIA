@@ -60,11 +60,14 @@ public class PropertyDetailManagedBean implements Serializable {
 
     @PostConstruct
     public void init() {
+       // this.id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+        if(id != null)this.property = propertyRepository.getById(Long.parseLong(id));
         geoModel = new DefaultMapModel();
-        this.id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-        this.property = propertyRepository.getById(Integer.parseInt(id));
+        
        
     }
+    
+
 
     public String getId() {
         return id;
@@ -72,7 +75,7 @@ public class PropertyDetailManagedBean implements Serializable {
 
     public void onGeocode(GeocodeEvent event) {
         List<GeocodeResult> results = event.getResults();
-
+        
         if (results != null && !results.isEmpty()) {
             LatLng center = results.get(0).getLatLng();
             centerGeoMap = center.getLat() + "," + center.getLng();
@@ -98,11 +101,6 @@ public class PropertyDetailManagedBean implements Serializable {
         this.id = id;
     }
 
-    public String detailAction() {
-        //now action property contains "delete"
-      
-        this.property = propertyRepository.getById(Integer.parseInt(id));
-        return "detail";
-    }
+ 
 
 }

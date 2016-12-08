@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import model.Property;
 import model.User;
+import repository.AddressRepository;
 import repository.PropertyRepository;
 import repository.UserRepository;
 import utils.SessionUtils;
@@ -27,6 +28,7 @@ import utils.SessionUtils;
 public class MainManagedBean implements Serializable{
     private UserRepository userRepository = new UserRepository();
     private PropertyRepository propertyRepository = new PropertyRepository();
+    private AddressRepository addressRepository = new AddressRepository();
     private User user = new User();
     private List<Property> myProperties;
     private List<Property> favoriteProperties;
@@ -36,9 +38,59 @@ public class MainManagedBean implements Serializable{
     public void init()
     {
 
-        user = userRepository.getUser(Integer.parseInt(SessionUtils.getUserId()));
-        allProperties = propertyRepository.findAllPropertiesNotOwned(user.getId());
+        user = userRepository.getUser(Long.parseLong(SessionUtils.getUserId()));
+        
+        allProperties = propertyRepository.findAllProperties();
         favoriteProperties = propertyRepository.findAllFavoritedProperties(user.getId());
         
+        
+        
+        
     }
+
+
+    public List<String> getBrands() {
+        return addressRepository.findAllPropertyStates();
+    }
+    public PropertyRepository getPropertyRepository() {
+        return propertyRepository;
+    }
+
+    public void setPropertyRepository(PropertyRepository propertyRepository) {
+        this.propertyRepository = propertyRepository;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Property> getMyProperties() {
+        return myProperties;
+    }
+
+    public void setMyProperties(List<Property> myProperties) {
+        this.myProperties = myProperties;
+    }
+
+    public List<Property> getFavoriteProperties() {
+        return favoriteProperties;
+    }
+
+    public void setFavoriteProperties(List<Property> favoriteProperties) {
+        this.favoriteProperties = favoriteProperties;
+    }
+
+    public List<Property> getAllProperties() {
+        return allProperties;
+    }
+
+    public void setAllProperties(List<Property> allProperties) {
+        this.allProperties = allProperties;
+    }
+    
+    
 }

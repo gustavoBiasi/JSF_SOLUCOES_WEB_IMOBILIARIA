@@ -23,33 +23,41 @@ public class Photo implements Serializable {
     @Id
     @GeneratedValue
     @Column(name="photo_id")
-    private Integer id; 
-    private Path path;
+    private Long id; 
+    private byte[] data;
     
-    public Photo(Path path)          
-    {
-        this.path = path;
+    private String fileName;
+
+    public String getFileName() {
+        return fileName;
     }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+
     
     public Photo()
     {
         
     }
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Path getPath() {
-        return path;
+    public byte[] getData() {
+        return data;
     }
 
-    public void setPath(Path path) {
-        this.path = path;
+    public void setData(byte[] data) {
+        this.data = data;
     }
+
    
     
 }

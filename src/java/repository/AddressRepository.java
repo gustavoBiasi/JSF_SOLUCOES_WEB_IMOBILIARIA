@@ -6,8 +6,12 @@
 package repository;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import model.Address;
+import utils.EntityManagerSingleton;
 
 /**
  *
@@ -16,12 +20,23 @@ import model.Address;
 public class AddressRepository implements Serializable{
     private EntityManager manager;
     
-    public AddressRepository(EntityManager manager){
-        this.manager=manager;
+    public AddressRepository(){
+        this.manager = EntityManagerSingleton.getEntityManager();
     }
     
     public void AddAddress(Address address){
         this.manager.persist(address);
+    }
+    
+    public List<String> findAllPropertyStates()
+    {
+        try{
+            Query query = manager.createQuery("Select distinct a.state from Address a join Property p" );
+           
+            return query.getResultList();
+        }catch(NoResultException e) {
+            return null;
+        }
     }
     
     

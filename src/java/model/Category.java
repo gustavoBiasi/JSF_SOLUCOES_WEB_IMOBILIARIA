@@ -21,16 +21,16 @@ public class Category implements Serializable{
     @Id
     @GeneratedValue
     @Column(name = "category_id")
-    private long id;
+    private Long id;
     private String title;
     private String description;
     private boolean isEnabled;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

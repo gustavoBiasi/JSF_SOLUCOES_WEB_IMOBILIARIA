@@ -15,6 +15,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import model.Category;
@@ -27,9 +28,9 @@ import org.primefaces.model.UploadedFile;
 import repository.CategoryRepository;
 
 import repository.PropertyRepository;
+import repository.UserRepository;
 import services.CepService;
 import utils.SessionUtils;
-import utils.UploadFileUtil;
 
 
 /**
@@ -43,9 +44,9 @@ public class RegisterPropertyManagedBean implements Serializable {
     CategoryRepository categoryRepository = new CategoryRepository();
     
     PropertyRepository propertyRepository = new PropertyRepository();
-    private Map<Long,String> categories;
     
-    private String addedPhotos = null;
+    private List<Category> categories = new ArrayList<Category>();
+
     
     private List<UploadedFile> photos = new ArrayList<UploadedFile>();
     private String cep = "";
@@ -58,27 +59,30 @@ public class RegisterPropertyManagedBean implements Serializable {
         this.cep = cep;
     }
      
-    public String getAddedPhotos() {
-        return addedPhotos;
-    }
+
     
     
     
     @PostConstruct
     public void init()
     {
-        categories = new HashMap<>();
-        List<Category> categoryList = categoryRepository.getAllCategories();
         
-        for(Category c : categoryList)
-        {
-            categories.put(c.getId(), c.getTitle());
-        }
+               
+        categories = categoryRepository.getAllCategories();
+        
+       
+       
+        
+        
     }
 
-    public Map<Long, String> getCategories() {
+    
+   
+    public List<Category> getCategories() {
         return categories;
     }
+    
+    
     
     public Property getProperty() {
         return property;
@@ -90,19 +94,24 @@ public class RegisterPropertyManagedBean implements Serializable {
     
     public String createProperty()
     {
-        if(property != null  )
-        {
-            for(UploadedFile photo : photos)
-            {
-            
-                property.getPhotos().add(new Photo(UploadFileUtil.upload(photo, SessionUtils.getUserId())));
-            
-            }
+        UserRepository userRepository = new UserRepository();
+        User u = userRepository.getUser(Long.parseLong(SessionUtils.getUserId()));
         
+        if(property != null && u != null  )
+        {
             
-            propertyRepository.addProperty(property);
-            property = new Property();
+            
+            property.setOwner(u);
            
+            Long newId = propertyRepository.addProperty(property);
+            if(newId == null)
+            {
+                FacesContext.getCurrentInstance().addMessage(
+                    null, 
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Verifique sua conexão", "Ocorreu um erro!"));
+            }
+            property = new Property();
+            return "detail.xhtml?id=" + newId;
         }
         FacesContext.getCurrentInstance().addMessage(
                     null, 
@@ -115,7 +124,10 @@ public class RegisterPropertyManagedBean implements Serializable {
     public void addPhoto(FileUploadEvent event)
     {
 
-        photos.add(event.getFile());
+        Photo p = new Photo();
+        p.setData(event.getFile().getContents());
+        p.setFileName(event.getFile().getFileName());
+        property.getPhotos().add(p);
         
         
 
@@ -131,7 +143,8 @@ public class RegisterPropertyManagedBean implements Serializable {
     public void refreshCep()
     {
 
-             if(this.cep.equals("")) return;
+             if(cep.length() == 8)
+             {
               CepService cepService = new CepService(this.cep);
 
               if(cepService.getSuccess() == 0)
@@ -150,7 +163,7 @@ public class RegisterPropertyManagedBean implements Serializable {
                    property.getAddress().setStreet(cepService.getStreet());
                    property.getAddress().setCep(cep);
               }
-
+            }
 
 
     }

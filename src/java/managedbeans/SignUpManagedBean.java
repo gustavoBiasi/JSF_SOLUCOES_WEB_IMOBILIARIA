@@ -71,26 +71,28 @@ public class SignUpManagedBean implements Serializable{
     public void refreshCep()
     {
       
-          if(this.cep.equals("")) return;
-           CepService cepService = new CepService(this.cep);
+          if(cep.length() == 8 )
+          {
+            CepService cepService = new CepService(this.cep);
+
+            if(cepService.getSuccess() == 0)
+            {
+
+                FacesContext.getCurrentInstance().addMessage(
+                     null, 
+                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cep Inválido", "Ocorreu um erro!"));
+            }
+            else
+            {
+
+                 user.getAdress().setCity(cepService.getCity());
+                 user.getAdress().setDistrict(cepService.getDistrict());
+                 user.getAdress().setState(cepService.getState());
+                 user.getAdress().setStreet(cepService.getStreet());
+                 user.getAdress().setCep(cep);
+            }
           
-           if(cepService.getSuccess() == 0)
-           {
-              
-               FacesContext.getCurrentInstance().addMessage(
-                    null, 
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cep Inválido", "Ocorreu um erro!"));
-           }
-           else
-           {
-                
-                user.getAdress().setCity(cepService.getCity());
-                user.getAdress().setDistrict(cepService.getDistrict());
-                user.getAdress().setState(cepService.getState());
-                user.getAdress().setStreet(cepService.getStreet());
-                user.getAdress().setCep(cep);
-           }
-          
+          }
                   
 
     }

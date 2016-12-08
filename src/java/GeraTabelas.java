@@ -31,6 +31,7 @@ public class GeraTabelas {
         property.setBedrooms(3);
         Category category=new Category();
         category.setDescription("PRAIANA");
+        category.setTitle("PRAIANA");
         property.setCategory(category);
         property.setDailyRentPrice(BigDecimal.valueOf(20.0));
         property.setParkingSlot(3);

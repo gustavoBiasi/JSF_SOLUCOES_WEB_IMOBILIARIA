@@ -7,8 +7,14 @@ package model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.nio.file.Path;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +36,7 @@ public class Property implements Serializable{
     @Id
     @GeneratedValue()
     @Column(name = "property_id")
-    private Integer id;
+    private Long id;
    
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
@@ -60,26 +66,47 @@ public class Property implements Serializable{
     private Integer parkingSlot;
     
     @ManyToOne(cascade=CascadeType.ALL)
-    private Category category;
+    private Category category = new Category();
     
-    @OneToMany
-    private Collection<Photo> photos;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private Collection<Photo> photos = new ArrayList<Photo>();
 	
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
-    private Address address;
+    private Address address = new Address();
     
     @Temporal(TemporalType.DATE)
     private Date createdAt;
     
-  
+   
+    public Photo getFirstPhoto()
+    {
+        
+        if(photos.size() > 0) return (Photo) photos.toArray()[0];
+        
+        return null;
+    }
 
-    public Integer getId() {
+    public String getCurrencySalePrice()
+    {
+        if(salePrice == null) return "-";
+        NumberFormat n = NumberFormat.getCurrencyInstance(Locale.US); 
+        return n.format(this.salePrice.divide(new BigDecimal(100)));
+    }
+    
+    public String getCurrencyDailyRent()
+    {
+        if(dailyRentPrice == null) return "-";
+        NumberFormat n = NumberFormat.getCurrencyInstance(Locale.US); 
+        return n.format(this.dailyRentPrice.divide(new BigDecimal(100)));
+    }
+    
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -201,6 +228,7 @@ public class Property implements Serializable{
         this.address = address;
     }
 
+ 
     public Date getCreatedAt() {
         return createdAt;
     }

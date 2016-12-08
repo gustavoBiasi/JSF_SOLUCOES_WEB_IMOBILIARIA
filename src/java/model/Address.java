@@ -24,7 +24,7 @@ public class Address implements Serializable{
     @Column(name = "address_id")
     //lara, acrescentei o generatedvalue
     @GeneratedValue
-    private Integer id;
+    private Long id;
    
     @Column(length = 2)
     private String state;
@@ -51,11 +51,11 @@ public class Address implements Serializable{
     
 
     
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

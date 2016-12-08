@@ -12,33 +12,84 @@ and open the template in the editor.
    
   <h:head>
    
+      <style>
+          .panel-venda tr
+          {
+              background-color:#ddd;
+              border-radius:25px;
+              border-color: #ccc;
+          }
+          
+          .panel-venda td
+          {
+              border-style: none !important;
+          }
+      </style>
   </h:head>
    
   <h:body>
         <h:form>
-   
-<!--            <p:repeat value="#{mainManagedBean}" var="car">
-            <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-                <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()">
-                    <f:setPropertyActionListener value="#{car}" target="#{dataListView.selectedCar}" />
-                    <p:graphicImage name="demo/images/car/#{car.brand}-big.gif" /> 
-                </p:commandLink>
 
-                <p:outputPanel>
-                    <h:panelGrid columns="2" cellpadding="5">
-                        <h:outputText value="Id:" />
-                        <h:outputText value="#{car.id}" style="font-weight: bold"/>
+           
+                  
+         
+            <p:dataScroller widgetVar="propTable" value="#{mainManagedBean.allProperties}" var="prop" chunkSize="10" >
+      
 
-                        <h:outputText value="Year:" />
-                        <h:outputText value="#{car.year}" style="font-weight: bold"/>
+                
+                <div class="ui-g" style="background-color:#eee; border:1px solid #ddd;padding: 10px">
+                  <p:graphicImage class="ui-g-2" height="150px" value="#{imagesManagedBean.image}">
+                      <f:param name="id" value="#{prop.firstPhoto.id}" />
+                </p:graphicImage>
 
-                        <h:outputText value="Color:" />
-                        <h:outputText value="#{car.color}" style="font-weight: bold"/>
-                    </h:panelGrid>
-                </p:outputPanel>
-            </h:panelGrid>
-            <hr />
-        </p:repeat>-->
+                  <div class="ui-g-10" style="text-align: left; float:left">
+                      <div class="ui-g-12 ">
+                         
+                          
+                          <h:outputText value="#{prop.title}" style="font-weight: bold"/>
+                          <h4 style="float:right"> Estado: #{prop.address.state} </h4> 
+                            <br/>
+                          <h:outputText value="#{prop.description}" />
+                           <br/>
+                       
+                            <br/>
+                            <p:panelGrid columns="2" class="panel-venda" rendered="#{prop.isVendible}" >
+                               
+                                    <h6>Venda:</h6>
+                                    <h:outputText value="#{prop.salePrice}" >
+                                        <f:convertNumber  type="currency" currencySymbol="$" />
+                                    </h:outputText>
+                                
+                            </p:panelGrid>
+                            <p:panelGrid columns="2" class="panel-venda" rendered="#{prop.isRentable}">
+                                
+                                    <h6>Diária:</h6>
+                                    <h:outputText value="#{prop.dailyRentPrice}" >
+
+                                        <f:convertNumber  type="currency" currencySymbol="$" />
+                                    </h:outputText>
+                               
+                            </p:panelGrid>
+                            
+                            
+
+                                       
+                         
+                          
+                      </div>
+                      
+                        <h:link value="Ver mais detalhes" outcome="detail">
+                                <f:param name="id" value="#{prop.id}"></f:param>
+                  
+                         </h:link>
+                  </div>
+                    
+                  
+                  
+                
+              </div>
+                
+          </p:dataScroller>
         </h:form>
   </h:body>
   </html>

@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import model.Address;
 import model.Property;
 import utils.EntityManagerSingleton;
 
@@ -24,19 +25,21 @@ public class PropertyRepository implements Serializable{
         this.manager = EntityManagerSingleton.getEntityManager();
     }
     
-    public boolean addProperty(Property property){
+    public Long addProperty(Property property){
         try{
-            this.manager.getTransaction().begin();
-            System.out.println("salvando propriedade sucesso");
+           if(!manager.getTransaction().isActive())  manager.getTransaction().begin();
+            
+            
             this.manager.persist(property);
             this.manager.flush();
             this.manager.getTransaction().commit();
-            return true;
+            System.out.println("salvando propriedade sucesso");
+            return property.getId();
         }catch(Exception e)
         {
             System.out.println("salvando falha propriedade");
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
     
@@ -54,7 +57,7 @@ public class PropertyRepository implements Serializable{
     
     public List<Property> findAllFavoritedProperties(long userId)
     {
-          try{
+        try{
             Query query = manager.createQuery("select fav from User u join u.favorites fav where u.id = :userid" );
             query.setParameter("userid", userId);
             return query.getResultList();
@@ -64,9 +67,11 @@ public class PropertyRepository implements Serializable{
         
     }
     
+    
+    
     public List<Property> findAllProperties(){
         try{
-            Query query=manager.createQuery("select prop from Property p");
+            Query query=manager.createQuery("SELECT p from Property p");
             return query.getResultList();
             
         }catch(NoResultException ex){
@@ -75,7 +80,7 @@ public class PropertyRepository implements Serializable{
         }
     }
     
-    public Property getById(Integer id){
+    public Property getById(Long id){
         try{
             return this.manager.find(Property.class, id);
         }

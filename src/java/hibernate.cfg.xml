@@ -46,5 +46,6 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/homecoming</property>
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">peixe</property>
+
   </session-factory>
 </hibernate-configuration>

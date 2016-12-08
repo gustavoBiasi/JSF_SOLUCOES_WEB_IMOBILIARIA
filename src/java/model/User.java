@@ -35,7 +35,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue
     @Column(name="user_id")
-    private Integer id;
+    private Long id;
     private String name;
     private String email;
     private String password;
@@ -64,11 +64,11 @@ public class User implements Serializable {
     })
     private Set<Property> favorites = new HashSet<Property>(0);
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

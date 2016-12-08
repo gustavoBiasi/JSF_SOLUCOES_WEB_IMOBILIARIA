@@ -26,6 +26,7 @@ public class CategoryRepository implements Serializable{
     
     public List<Category> getAllCategories(){
         try{
+            
             Query query = manager.createQuery("SELECT c FROM Category c");
             return query.getResultList();
         }catch(NoResultException e) {
@@ -33,8 +34,23 @@ public class CategoryRepository implements Serializable{
         }
     }
     
+    
+    public Category findById(Long id)
+    {
+        Category c = null;
+        try
+        {
+            c = manager.find(Category.class, id);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return c;
+    }
     public boolean addCategory (Category category){
         try{
+            if(!manager.getTransaction().isActive())  manager.getTransaction().begin();
             this.manager.persist(category);
             return true;
         }catch(Exception e)

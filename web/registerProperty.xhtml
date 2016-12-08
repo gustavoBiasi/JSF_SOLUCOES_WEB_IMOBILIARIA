@@ -19,9 +19,11 @@ and open the template in the editor.
             <p:panelGrid columns="2">
                 
                 
-                <p:outputLabel for="title" value="Titulo:" />
+                <p:outputLabel for="title" value="Titulo do anúncio:" />
                 <p:inputText id="title"  maxlength="100" value="#{registerPropertyManagedBean.property.title}" required="true" />
-          
+                   
+                 <p:outputLabel for="description" value="Descrição:" />
+                 <p:inputTextarea  autoResize="true" rows="10" cols="50" id="description" value="#{registerPropertyManagedBean.property.description}" required="true"/>     
                 <h:outputText value="Para venda: " />
                 <p:selectBooleanCheckbox value="#{registerPropertyManagedBean.property.isVendible}">
                    <p:ajax event="change" update="salePrice" />
@@ -36,12 +38,15 @@ and open the template in the editor.
                 <p:inputText id="dailyRentPrice"  disabled="#{!registerPropertyManagedBean.property.isRentable}" value="#{registerPropertyManagedBean.property.dailyRentPrice}" required="true"  />
                 
                 <p:outputLabel for="category" value="Categoria" />
-                <p:selectOneMenu id="category" value="#{registerPropertyManagedBean.property.categoriy}" >
-                    <f:selectItem itemLabel="Escolha uma categoria" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{registerPropertyManagedBean.categories}" />
+                <p:selectOneMenu 
+                    id="category" 
+                    value="#{registerPropertyManagedBean.property.category}"
+                    converter="#{categoryConverterBean}">       
+                     <f:selectItem itemValue="" itemLabel="Selecione uma categoria"/> 
+                     <f:selectItems value="#{registerPropertyManagedBean.categories}" var="cat" itemValue="#{cat}" itemLabel="#{cat.title}" />
                 </p:selectOneMenu>
                 
-                <p:dataList id="photosList" value="#{registerPropertyManagedBean.photos}" var="photo" type="ordered">
+                <p:dataList id="photosList" value="#{registerPropertyManagedBean.property.photos}" var="photo" type="ordered">
                        <f:facet name="header">
                            Fotos
                        </f:facet>
@@ -56,10 +61,10 @@ and open the template in the editor.
                 <p:outputLabel for="cep" value="Cep:" />
                 
                 
-                <p:inputText  id="cep" value="#{registerPropertyManagedBean.cep}"  required="true" 
+                <p:inputText  id="cep" value="#{registerPropertyManagedBean.cep}"  maxlength="8" required="true" 
                              validatorMessage="Insira um CEP válido">   
-                   <f:validateRegex pattern="\\d{5}-\\d{3}" for="cep"></f:validateRegex>
-                    <p:ajax   event="keyup" update="street, city, state, cep" listener="#{registerPropertyManagedBean.refreshCep}" />
+                   
+                    <p:ajax   event="keyup" update="street, city, state" listener="#{registerPropertyManagedBean.refreshCep}" />
                 </p:inputText>                
                  
                 <p:outputLabel for="street" value="Rua:" />
@@ -77,10 +82,24 @@ and open the template in the editor.
                 <p:inputText id="state"  maxlength="2" value="#{registerPropertyManagedBean.property.address.state}" disabled="true" required="true"/>      
                 
                          
-                <p:outputLabel for="addinfo" value="Additional Info:" />
-                <p:inputText id="addinfo" value="#{registerPropertyManagedBean.property.address.additionalInfo}" required="true"/>         
+                <p:outputLabel for="addinfo" value="Complemento:" />
+                <p:inputText id="addinfo" value="#{registerPropertyManagedBean.property.address.additionalInfo}"/>   
                 
-                <p:commandButton value="Prosseguir" icon="ui-icon-check"  action="#{registerPropertyManagedBean.createProperty()}" ajax="false">
+                <p:outputLabel for="bathrooms" value="Banheiros" />
+                <p:inputText id="bathrooms" value="#{registerPropertyManagedBean.property.bathrooms}" required="true"/>    
+                
+                 <p:outputLabel for="bedrooms" value="Dormitórios:" />
+                 <p:inputText id="bedrooms" value="#{registerPropertyManagedBean.property.bedrooms}" required="true"/>  
+                 
+                 <p:outputLabel for="parkinglot" value="Vagas na garagem:" />
+                 <p:inputText id="parkinglot" value="#{registerPropertyManagedBean.property.parkingSlot}" required="true"/>  
+                
+                 <p:outputLabel for="area" value="Área (Metros Quadrados):" />
+                 <p:inputText id="area" value="#{registerPropertyManagedBean.property.squareMeter}" required="true"/>
+                 
+                
+                
+                <p:commandButton value="Prosseguir" icon="ui-icon-check"  action="#{registerPropertyManagedBean.createProperty}" ajax="false">
                 </p:commandButton>
                 
             </p:panelGrid>
