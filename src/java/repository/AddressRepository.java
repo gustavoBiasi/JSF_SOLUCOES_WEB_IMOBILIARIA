@@ -25,7 +25,9 @@ public class AddressRepository implements Serializable{
     }
     
     public void AddAddress(Address address){
+         if(!manager.getTransaction().isActive())  manager.getTransaction().begin();
         this.manager.persist(address);
+        manager.getTransaction().commit();
     }
     
     public List<String> findAllPropertyStates()

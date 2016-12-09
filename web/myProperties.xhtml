@@ -79,14 +79,14 @@ and open the template in the editor.
                            <h5 style="text-align:right"> Estado: #{prop.address.state} </h5> 
                            <br/>
                            <h5 style="text-align:right"> Categoria: #{prop.category.title} </h5> 
-                             <p:menuButton value="Options">
-                                 <p:menuitem value="Save" actionListener="#{myPropertiesManagedBean.edit(property)}" update="messages" icon="ui-icon-disk"/>
-                                 <p:menuitem value="Delete" actionListener="#{myPropertiesManagedBean.delete(property)}" ajax="false" icon="ui-icon-close"/>
-                                <p:separator />
-                             </p:menuButton>
+                            
                            
                        </div>
-                      
+                       <p:menuButton style="float:right" value="Opção">
+                           <p:menuitem value="Editar" outcome="registerProperty?id=#{prop.id}"  icon="ui-icon-disk"/>
+                                 <p:menuitem value="Excluir" actionListener="#{myPropertiesManagedBean.delete(prop)}" update="propertiesMain" icon="ui-icon-close"/>
+                                <p:separator />
+                        </p:menuButton>
                      
                   </div>
                     

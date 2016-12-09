@@ -23,49 +23,36 @@ public class GeraTabelas {
     public static void main (String[] args){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("HomeComingPU");
         entityManagerFactory.close();
-        System.out.println("GeraTabelas.main()");
-        System.out.println("salvando propriedade");
-        Property property=new Property();
-        property.setTitle("Casa na praia");
-        property.setSalePrice(new BigDecimal("1.1"));
-        property.setBathrooms(2);
-        property.setBedrooms(3);
-        Category category=new Category();
-        category.setDescription("PRAIANA");
-        category.setTitle("PRAIANA");
-        property.setCategory(category);
-        property.setDailyRentPrice(BigDecimal.valueOf(20.0));
-        property.setParkingSlot(3);
-        property.setIsRentable(true);
-        property.setIsVendible(false);
-        User user = new User();
-        user.setName("Lara");
-        user.setEmail("teste@teste.com");
-        user.setPassword("teste");
-        user.setPhone("(22)9999-9999");
-        property.setOwner(user);
-        property.setSquareMeter(200.00);
-        Address address = new Address();
-        address.setCep("05201-210");
-        address.setCity("São Paulo");
-        address.setState("SP");
-        address.setStreet("Rua demifonte");
-        address.setDistrict("Perus");
-        address.setAdditionalInfo("Jardim Adelfiore");
-        address.setNumber("9");
-        property.setAddress(address); 
-        property.setDescription("Casa n praia, ótima localização. Beira mar e brisa leve.");
-        PropertyRepository propertyrepository=new PropertyRepository();
-        propertyrepository.addProperty(property);
-        
+      
         CategoryRepository categoryRepository = new CategoryRepository();
+        
+        Category a = new Category();
+        a.setIsEnabled(true);
+        a.setTitle("Casa");
+        a.setDescription("Casa comum");
+        categoryRepository.addCategory(a);
+        System.out.println("salvando categoria");
+        
+        Category b = new Category();
+        b.setIsEnabled(true);
+        b.setTitle("Apartamento");
+        b.setDescription("Apartamento médio");
+        categoryRepository.addCategory(b);
+        System.out.println("salvando categoria");
         
         Category c = new Category();
         c.setIsEnabled(true);
-        c.setTitle("Casa");
-        c.setDescription("Casa comum");
+        c.setTitle("Duplex");
+        c.setDescription("Casa de dois andares");
         categoryRepository.addCategory(c);
-        System.out.println("salvando propriedade");
+        System.out.println("salvando categoria");
+        
+        Category d = new Category();
+        d.setIsEnabled(true);
+        d.setTitle("Condomínio");
+        d.setDescription("Condôminio fechado");
+        categoryRepository.addCategory(d);
+        System.out.println("salvando categoria");
     }
     
 }

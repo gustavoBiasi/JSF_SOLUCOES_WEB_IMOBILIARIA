@@ -76,7 +76,10 @@ public class CepService {
 
 
     
-    
+    public CepService()
+    {
+        
+    }
  
     @SuppressWarnings("rawtypes")
     public CepService(String cep) {

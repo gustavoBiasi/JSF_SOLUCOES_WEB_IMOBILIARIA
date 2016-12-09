@@ -45,7 +45,7 @@ public class MainManagedBean implements Serializable{
     private String selectedState = "";
     private String selectedCategory = "";
     private String searchProperty = "";
-    private String fav = null;
+    private String fav = "0";
     public String getSelectedState() {
         return selectedState;
     }
@@ -101,9 +101,7 @@ public class MainManagedBean implements Serializable{
     
     public void filterProperties(final AjaxBehaviorEvent event)
     {
-        
-        if(fav.equals("1")) filteredProperties.retainAll(user.getFavorites());
-        else filteredProperties = new ArrayList(propertyRepository.findFilteredProperties(selectedCategory, selectedState, searchProperty));
+        filteredProperties = new ArrayList(propertyRepository.findFilteredProperties(selectedCategory, selectedState, searchProperty));
         
       
     }

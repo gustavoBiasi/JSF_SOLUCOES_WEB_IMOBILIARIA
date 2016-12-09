@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +21,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -65,6 +67,16 @@ public class User implements Serializable {
     })
     private Set<Property> favorites = new HashSet<Property>(0);
 
+    public Set<Property> getOwnProperties() {
+        return ownProperties;
+    }
+
+    public void setOwnProperties(Set<Property> ownProperties) {
+        this.ownProperties = ownProperties;
+    }
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private Set<Property> ownProperties = new HashSet<Property>();
     public Long getId() {
         return id;
     }

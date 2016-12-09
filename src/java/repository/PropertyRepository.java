@@ -43,6 +43,14 @@ public class PropertyRepository implements Serializable{
         }
     }
     
+    
+    public void delete(Property p)
+    {
+       
+        if(!manager.getTransaction().isActive())  manager.getTransaction().begin();
+        manager.remove(p);
+        manager.getTransaction().commit();
+    }
     public List<Property> findAllPropertiesNotOwned(long userId)
     {
           try{
@@ -81,7 +89,12 @@ public class PropertyRepository implements Serializable{
     
 
     
-    
+    public void save(Property u)
+    {
+         if(!manager.getTransaction().isActive())  manager.getTransaction().begin();
+        manager.persist(u);
+        manager.getTransaction().commit();
+    }
     public List<Property> findAllProperties(){
         try{
             Query query=manager.createQuery("SELECT p from Property p");

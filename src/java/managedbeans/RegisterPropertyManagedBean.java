@@ -62,7 +62,10 @@ public class RegisterPropertyManagedBean implements Serializable {
 
     
     
-    
+    private String id;
+    UserRepository userRepository = new UserRepository();
+    User u;
+    boolean isEditing = false;
     @PostConstruct
     public void init()
     {
@@ -70,7 +73,21 @@ public class RegisterPropertyManagedBean implements Serializable {
                
         categories = categoryRepository.getAllCategories();
         photos = new ArrayList<UploadedFile>();
-       
+        u = userRepository.getUser(Long.parseLong(SessionUtils.getUserId()));
+        this.id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+        if(id != null)
+        {
+            this.property = propertyRepository.getById(Long.parseLong(id));
+            if(!property.getOwner().getId().equals(u.getId()))
+            {
+                property = null;
+            }
+            else
+            {
+                isEditing = true;
+            }
+        }
+        
        
         
         
@@ -94,24 +111,32 @@ public class RegisterPropertyManagedBean implements Serializable {
     
     public String createProperty()
     {
-        UserRepository userRepository = new UserRepository();
-        User u = userRepository.getUser(Long.parseLong(SessionUtils.getUserId()));
+        
         
         if(property != null && u != null  )
         {
             
-            
-            property.setOwner(u);
-           
-            Long newId = propertyRepository.addProperty(property);
-            if(newId == null)
+            if(isEditing)
             {
+                propertyRepository.save(property);
+            }
+           
+            else
+            {
+                property.setOwner(u);
+                u.getOwnProperties().add(property);
+                userRepository.save(u);
+                Long newId = propertyRepository.addProperty(property);
+                if(newId == null)
+                {
                 FacesContext.getCurrentInstance().addMessage(
                     null, 
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Verifique sua conexão", "Ocorreu um erro!"));
+                 }
             }
+
             property = new Property();
-            return "detail?id=" + newId;
+            return "/myProperties";
         }
         FacesContext.getCurrentInstance().addMessage(
                     null, 
@@ -145,8 +170,14 @@ public class RegisterPropertyManagedBean implements Serializable {
 
              if(cep.length() == 8)
              {
-              CepService cepService = new CepService(this.cep);
-
+                 CepService cepService;
+                 try{
+                    cepService = new CepService(this.cep);
+                 }
+                 catch(Exception e)
+                 {
+                     cepService = new CepService();
+                 }
               if(cepService.getSuccess() == 0)
               {
 

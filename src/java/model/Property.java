@@ -18,6 +18,7 @@ import java.util.Locale;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -38,8 +39,8 @@ public class Property implements Serializable{
     @Column(name = "property_id")
     private Long id;
    
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
     private User owner;
     
     private String title;
@@ -65,7 +66,7 @@ public class Property implements Serializable{
     private Integer bedrooms;
     private Integer parkingSlot;
     
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.PERSIST)
     private Category category = new Category();
     
     @OneToMany(cascade = CascadeType.PERSIST)

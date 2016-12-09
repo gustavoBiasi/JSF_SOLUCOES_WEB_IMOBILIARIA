@@ -48,7 +48,7 @@ public class MyPropertiesManagedBean implements Serializable{
 
         user = userRepository.getUser(Long.parseLong(SessionUtils.getUserId()));
         
-        allProperties = propertyRepository.findAllPropertiesOwned(user.getId());
+        allProperties = new ArrayList(user.getOwnProperties());
 
         
     }
@@ -71,7 +71,19 @@ public class MyPropertiesManagedBean implements Serializable{
         this.user = user;
     }
 
-
+    public String edit(Property p)
+    {
+        
+        return null;
+    }
+    
+    public void delete(Property p)
+    {
+        propertyRepository.delete(p);
+        user.getOwnProperties().remove(p);
+        userRepository.save(user);
+        allProperties = new ArrayList(user.getOwnProperties());
+    }
 
     public List<Property> getAllProperties() {
         return allProperties;

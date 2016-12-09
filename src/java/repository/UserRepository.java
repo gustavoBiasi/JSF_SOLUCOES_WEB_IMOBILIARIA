@@ -27,6 +27,7 @@ public class UserRepository implements Serializable{
         try{
             if(!manager.getTransaction().isActive())  manager.getTransaction().begin();
             this.manager.persist(user);
+             manager.getTransaction().commit();
             return user.getId();
         }catch(Exception e)
         {
@@ -37,7 +38,9 @@ public class UserRepository implements Serializable{
     }
     public boolean removeUser(User user){
         try{
+             if(!manager.getTransaction().isActive())  manager.getTransaction().begin();
             this.manager.remove(user);
+             manager.getTransaction().commit();
             return true;
         }catch(Exception e)
         {
@@ -75,8 +78,9 @@ public class UserRepository implements Serializable{
     
     public void save(User u)
     {
+         if(!manager.getTransaction().isActive())  manager.getTransaction().begin();
         manager.persist(u);
-        
+        manager.getTransaction().commit();
     }
     
     public User findUserByEmail(String email)

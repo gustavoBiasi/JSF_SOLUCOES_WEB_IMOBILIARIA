@@ -62,6 +62,7 @@ public class CategoryRepository implements Serializable{
         try{
             if(!manager.getTransaction().isActive())  manager.getTransaction().begin();
             this.manager.persist(category);
+            manager.getTransaction().commit();
             return true;
         }catch(Exception e)
         {

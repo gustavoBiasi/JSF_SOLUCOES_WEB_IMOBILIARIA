@@ -25,6 +25,7 @@ public class PhotoRepository implements Serializable{
         try{
             if(!manager.getTransaction().isActive())  manager.getTransaction().begin();
             this.manager.persist(photo);
+            manager.getTransaction().commit();
             return true;
         }catch(Exception e)
         {
