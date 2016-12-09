@@ -6,6 +6,7 @@
 package managedbeans;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,7 +70,7 @@ public class RegisterPropertyManagedBean implements Serializable {
     @PostConstruct
     public void init()
     {
-        
+
                
         categories = categoryRepository.getAllCategories();
         photos = new ArrayList<UploadedFile>();

@@ -27,6 +27,25 @@ and open the template in the editor.
       </style>
   
         <h:form>
+        <div class="ui-g-12">
+            <p:carousel rendered="#{mainManagedBean.sameCityProperties.size() > 0}" value="#{mainManagedBean.sameCityProperties}" headerText="Anúncios perto de você" var="sugProp" itemStyle="text-align:center" responsive="true">
+                    <p:panelGrid columns="1" style="width:80%;margin:10px 0px" columnClasses="label,value" layout="grid" styleClass="ui-panelgrid-blank">
+                        <f:facet name="header">
+                             <p:graphicImage class="ui-g-12" height="150px" value="#{imagesManagedBean.image}">
+                                 <f:param name="id" value="#{sugProp.firstPhoto.id}" />
+                            </p:graphicImage> 
+                        </f:facet>
+                       
+                        <h:link value="#{sugProp.title}" outcome="detail">
+                                    <f:param name="id" value="#{sugProp.id}"></f:param>
+
+                        </h:link>
+
+                    </p:panelGrid>
+
+    
+                </p:carousel>
+        </div>
         <div class="ui-g-12"> 
             <div class="ui-g-4">
                 <p:outputLabel for="states" value="Estados:" />
@@ -76,16 +95,23 @@ and open the template in the editor.
                             <p:panelGrid columns="2" class="panel-venda" rendered="#{prop.isVendible}" >
                                
                                     <h5>Venda:</h5>
-                                    <h:outputText   style="font-weight: bold; color:white" value="#{prop.salePrice}" >
+                                    <h:outputText  class="#{(prop.saleDiscount > 1) ? 'oferta': ''}" style="font-weight: bold; color:white" value="#{prop.salePrice}" >
                                         <f:convertNumber  type="currency" currencySymbol="$" />
                                     </h:outputText>
-                                
+                                    <h5 style="#{(prop.saleDiscount > 1) ? 'display:block': 'display:none; height:0'}">Oferta! </h5>
+                                    <h:outputText   rendered="#{prop.saleDiscount > 1}" style="#{(prop.saleDiscount > 1) ? 'display:block': 'display:none; height:0'};float:right; font-weight: bold; color:white" value="#{prop.totalSalePrice}" >
+                                        <f:convertNumber  type="currency" currencySymbol="$" />
+                                    </h:outputText>
                             </p:panelGrid>
                             <p:panelGrid columns="2" class="panel-venda"  rendered="#{prop.isRentable}">
                                 
                                     <h5>Diária:</h5>
-                                    <h:outputText  style="font-weight: bold; color:white" value="#{prop.dailyRentPrice}" >
+                                    <h:outputText class="#{(prop.rentDiscount > 1) ? 'oferta': ''}" style="font-weight: bold; color:white" value="#{prop.dailyRentPrice}" >
 
+                                        <f:convertNumber  type="currency" currencySymbol="$" />
+                                    </h:outputText>
+                                    <h5 style="#{(prop.rentDiscount > 1) ? 'display:block': 'display:none; height:0'}">Oferta! </h5>
+                                    <h:outputText   rendered="#{prop.rentDiscount > 1}" style="#{(prop.rentDiscount > 1) ? 'display:block': 'display:none; height:0'};float:right; font-weight: bold; color:white" value="#{prop.totalRentPrice}" >
                                         <f:convertNumber  type="currency" currencySymbol="$" />
                                     </h:outputText>
                                

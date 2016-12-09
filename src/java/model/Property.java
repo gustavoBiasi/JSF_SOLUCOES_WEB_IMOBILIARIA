@@ -7,13 +7,12 @@ package model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.nio.file.Path;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+
 import java.util.Locale;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,12 +44,39 @@ public class Property implements Serializable{
     
     private String title;
 
- 
+    private Double saleDiscount = 0.0;
+    private Double rentDiscount = 0.0;
     
-    private BigDecimal  salePrice;
+    public BigDecimal getTotalSalePrice()
+    {
+        return salePrice.multiply(new BigDecimal(1 - saleDiscount/100));
+    }
+
+    public Double getSaleDiscount() {
+        return saleDiscount;
+    }
+
+    public void setSaleDiscount(Double saleDiscount) {
+        this.saleDiscount = saleDiscount;
+    }
+
+    public Double getRentDiscount() {
+        return rentDiscount;
+    }
+
+    public void setRentDiscount(Double rentDiscount) {
+        this.rentDiscount = rentDiscount;
+    }
+    
+    public BigDecimal getTotalRentPrice()
+    {
+        return dailyRentPrice.multiply(new BigDecimal(1 - rentDiscount/100));
+    }
+    
+    private BigDecimal  salePrice = new BigDecimal(0);
     
     
-    private BigDecimal dailyRentPrice;
+    private BigDecimal dailyRentPrice = new BigDecimal(0);
     
    
     private boolean isRentable;

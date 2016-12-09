@@ -37,16 +37,38 @@ and open the template in the editor.
                  <p:inputTextarea  autoResize="true" rows="10" cols="50" id="description" value="#{registerPropertyManagedBean.property.description}" required="true"/>     
                 <h:outputText value="Para venda: " />
                 <p:selectBooleanCheckbox value="#{registerPropertyManagedBean.property.isVendible}">
-                   <p:ajax event="change" update="salePrice" />
+                   <p:ajax event="change" update="salePrice, discountSale" />
                 </p:selectBooleanCheckbox>
                 <p:outputLabel for="salePrice" value="Preço de venda:" />
-                <p:inputNumber  id="salePrice" disabled="#{!registerPropertyManagedBean.property.isVendible}"  value="#{registerPropertyManagedBean.property.salePrice}" required="true" />
+                <p:inputNumber  id="salePrice" disabled="#{!registerPropertyManagedBean.property.isVendible}"  value="#{registerPropertyManagedBean.property.salePrice}" required="true" >
+                    <p:ajax event="blur" update="@this" />
+                </p:inputNumber>
+                <p:outputLabel for="discountSale" value="Desconto (porcentagem):" />
+                <p:inputNumber maxValue="90" symbol="%" 
+                                symbolPosition="s" emptyValue="zero" minValue="0" id="discountSale"  disabled="#{!registerPropertyManagedBean.property.isVendible}" value="#{registerPropertyManagedBean.property.saleDiscount}"  >
+                    <p:ajax event="keyup" update="totalSalePrice, salePrice"/>
+                </p:inputNumber>
+                
+                <p:outputLabel for="totalSalePrice" value="Preço Total:" />
+                <p:inputNumber  id="totalSalePrice"  disabled="true" value="#{registerPropertyManagedBean.property.totalSalePrice}"  />
+                
+
                 <h:outputText value="Para alugar: " />
                 <p:selectBooleanCheckbox value="#{registerPropertyManagedBean.property.isRentable}" >
-                    <p:ajax event="change" update="dailyRentPrice" />
+                    <p:ajax event="change" update="dailyRentPrice,discountRent " />
                 </p:selectBooleanCheckbox>
                 <p:outputLabel for="dailyRentPrice" value="Aluguel Diário:" />
-                <p:inputNumber  id="dailyRentPrice"  disabled="#{!registerPropertyManagedBean.property.isRentable}" value="#{registerPropertyManagedBean.property.dailyRentPrice}" required="true"  />
+                <p:inputNumber  id="dailyRentPrice"  disabled="#{!registerPropertyManagedBean.property.isRentable}" value="#{registerPropertyManagedBean.property.dailyRentPrice}" required="true" >
+                    <p:ajax event="blur" update="@this"/>
+                </p:inputNumber>
+                <p:outputLabel for="discountRent" value="Desconto (porcentagem):" />
+                <p:inputNumber minValue="0" symbol="%" 
+                                symbolPosition="s" emptyValue="zero" maxValue="90" id="discountRent"  disabled="#{!registerPropertyManagedBean.property.isRentable}" value="#{registerPropertyManagedBean.property.rentDiscount}"  >
+                        <p:ajax event="keyup" update="totalRentPrice, dailyRentPrice "/>
+                </p:inputNumber>
+                <p:outputLabel for="totalRentPrice" value="Preço Total:" />
+                <p:inputNumber  disabled="true" id="totalRentPrice"   value="#{registerPropertyManagedBean.property.totalRentPrice}"  />
+                   
                 
                 <p:outputLabel for="category" value="Categoria" />
                 <p:selectOneMenu 

@@ -8,6 +8,8 @@ package managedbeans;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -34,6 +36,20 @@ public class LoginManagedBean implements Serializable{
     
     private PropertyRepository propertyRepository = new PropertyRepository();
     
+    private String logout;
+    @PostConstruct
+    public void init()
+    {
+        logout = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("logout");
+        if(logout != null) 
+        {
+                        
+            HttpSession session = SessionUtils.getSession();
+            session.setAttribute("username", null);
+            session.setAttribute("userid", null);
+            
+        }
+    }
     
     public String send()
     {

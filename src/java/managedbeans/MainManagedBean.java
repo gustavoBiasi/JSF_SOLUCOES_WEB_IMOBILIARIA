@@ -41,6 +41,15 @@ public class MainManagedBean implements Serializable{
     private List<Property> favoriteProperties;
     private List<Property> allProperties;
     private List<Property> filteredProperties;
+
+    public List<Property> getSameCityProperties() {
+        return sameCityProperties;
+    }
+
+    public void setSameCityProperties(List<Property> sameCityProperties) {
+        this.sameCityProperties = sameCityProperties;
+    }
+    private List<Property> sameCityProperties;
     
     private String selectedState = "";
     private String selectedCategory = "";
@@ -75,7 +84,7 @@ public class MainManagedBean implements Serializable{
 
         filteredProperties = new ArrayList(allProperties);
         
-       
+        sameCityProperties = new ArrayList(propertyRepository.findPropertiesByCity(user.getAdress().getCity()));
         
         
         

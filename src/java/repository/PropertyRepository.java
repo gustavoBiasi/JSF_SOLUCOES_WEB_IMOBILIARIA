@@ -106,6 +106,19 @@ public class PropertyRepository implements Serializable{
         }
     }
     
+    public List<Property> findPropertiesByCity(String city){
+        try{
+            Query query=manager.createQuery("SELECT p from Property p WHERE p.address.city = :city ");
+            query.setParameter("city", city);
+            List<Property> lista = query.getResultList();
+            return query.getResultList().subList(0, Math.min(lista.size(), 3));
+            
+        }catch(NoResultException ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
     public List<Property> findFilteredProperties(String category, String state, String search){
         try{
             StringBuilder queryString = new StringBuilder("Select p from Property p WHERE 1=1 ");
