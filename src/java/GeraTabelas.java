@@ -6,6 +6,7 @@ import model.Address;
 import model.Category;
 import model.Property;
 import model.User;
+import repository.CategoryRepository;
 import repository.PropertyRepository;
 
 /*
@@ -56,6 +57,14 @@ public class GeraTabelas {
         property.setDescription("Casa n praia, ótima localização. Beira mar e brisa leve.");
         PropertyRepository propertyrepository=new PropertyRepository();
         propertyrepository.addProperty(property);
+        
+        CategoryRepository categoryRepository = new CategoryRepository();
+        
+        Category c = new Category();
+        c.setIsEnabled(true);
+        c.setTitle("Casa");
+        c.setDescription("Casa comum");
+        categoryRepository.addCategory(c);
         System.out.println("salvando propriedade");
     }
     

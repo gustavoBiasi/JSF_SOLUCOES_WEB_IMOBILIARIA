@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	
+	xmlns:p="http://primefaces.org/ui">
+    <body>
+	<h:form id="formMenu">
+		<p:menu style="width:200px; height: 400px">
+			<p:submenu label="Menu">
+				<p:menuitem value="Criar novo anúncio" outcome="registerProperty"/>
+                                <p:menuitem value="Ver meus anúncios " outcome="myProperties"/>
+                                <p:menuitem value="Ver todos os anúncios disponoveis " outcome="main" />
+                                <p:menuitem value="Meus anúncios favoritos" outcome="main?fav=1" >
+                                        
+                                </p:menuitem>
+				
+			
+                        </p:submenu>
+		</p:menu>
+	</h:form>
+    </body>
+</html>

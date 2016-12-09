@@ -34,6 +34,16 @@ public class CategoryRepository implements Serializable{
         }
     }
     
+     public List<String> getAllCategoriesAsString(){
+        try{
+            
+            Query query = manager.createQuery("SELECT c.title FROM Category c");
+            return query.getResultList();
+        }catch(NoResultException e) {
+            return null;
+        }
+    }
+    
     
     public Category findById(Long id)
     {

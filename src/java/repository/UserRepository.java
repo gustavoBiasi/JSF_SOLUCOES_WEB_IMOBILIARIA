@@ -73,6 +73,12 @@ public class UserRepository implements Serializable{
         }
     }
     
+    public void save(User u)
+    {
+        manager.persist(u);
+        
+    }
+    
     public User findUserByEmail(String email)
     {
         try

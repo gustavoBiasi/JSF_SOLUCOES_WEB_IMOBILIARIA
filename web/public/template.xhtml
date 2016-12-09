@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Homecoming</title>
+</h:head>
+<h:body>
+	<style type="text/css">
+.ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-widget-content{
+    border:none !important;
+}
+
+.ui-menu, .ui-menu .ui-menu-child
+{
+    background-color: white;
+}
+
+.favorited-button
+{
+    background-color:#ffbc00 !important;
+    color:white;
+}
+
+.normal-button
+{
+    background-color:white !important;
+}
+</style>
+	
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="100" resizable="false"
+			closable="false" collapsible="true">
+                    <ui:include src="header.xhtml" />
+		</p:layoutUnit>
+		<div class="ui-g-12">
+                    <p:layoutUnit position="west" size="200px" resizable="false"
+                            closable="false" collapsible="true" effect="drop">
+                        <ui:include src="menu.xhtml" />
+                    </p:layoutUnit>
+                    <p:layoutUnit position="center" style="width:80%">
+                            <ui:insert name="content" />
+                    </p:layoutUnit>
+                </div>
+          
+	</p:layout>
+</h:body>
+</html>

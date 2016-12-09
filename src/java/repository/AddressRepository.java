@@ -31,7 +31,7 @@ public class AddressRepository implements Serializable{
     public List<String> findAllPropertyStates()
     {
         try{
-            Query query = manager.createQuery("Select distinct a.state from Address a join Property p" );
+            Query query = manager.createQuery("Select distinct a.state from Address a join Property p WHERE a.state != null AND a != null" );
            
             return query.getResultList();
         }catch(NoResultException e) {

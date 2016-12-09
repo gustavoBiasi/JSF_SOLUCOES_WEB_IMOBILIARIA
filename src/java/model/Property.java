@@ -85,7 +85,7 @@ public class Property implements Serializable{
         
         if(photos.size() > 0) return (Photo) photos.toArray()[0];
         
-        return null;
+        return new Photo();
     }
 
     public String getCurrencySalePrice()

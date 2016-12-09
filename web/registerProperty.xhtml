@@ -5,18 +5,29 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    <h:body>
-        <h:form>
+<ui:composition template="public/template.xhtml" 
+    xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+     xmlns:ui="http://java.sun.com/jsf/facelets">
+   
+    <ui:define name="content">
+         <style>
+        
+        .ui-widget-header .ui-inputfield, .ui-widget-content .ui-inputfield
+        {
+            width:100% !important;
+            margin-right: 20px;
+        }
+        .ui-panelgrid .ui-panelgrid-cell
+        {
+            border:none !important;
+        }
+    </style>
+        <h:form style="width:80%; margin: 0 auto;">
             <p:messages id="messages" />
-            <p:panelGrid columns="2">
+            <p:panelGrid columns="2" style="width:100%">
                 
                 
                 <p:outputLabel for="title" value="Titulo do anúncio:" />
@@ -29,13 +40,13 @@ and open the template in the editor.
                    <p:ajax event="change" update="salePrice" />
                 </p:selectBooleanCheckbox>
                 <p:outputLabel for="salePrice" value="Preço de venda:" />
-                <p:inputText id="salePrice" disabled="#{!registerPropertyManagedBean.property.isVendible}" value="#{registerPropertyManagedBean.property.salePrice}" required="true" />
+                <p:inputNumber  id="salePrice" disabled="#{!registerPropertyManagedBean.property.isVendible}"  value="#{registerPropertyManagedBean.property.salePrice}" required="true" />
                 <h:outputText value="Para alugar: " />
                 <p:selectBooleanCheckbox value="#{registerPropertyManagedBean.property.isRentable}" >
                     <p:ajax event="change" update="dailyRentPrice" />
                 </p:selectBooleanCheckbox>
                 <p:outputLabel for="dailyRentPrice" value="Aluguel Diário:" />
-                <p:inputText id="dailyRentPrice"  disabled="#{!registerPropertyManagedBean.property.isRentable}" value="#{registerPropertyManagedBean.property.dailyRentPrice}" required="true"  />
+                <p:inputNumber  id="dailyRentPrice"  disabled="#{!registerPropertyManagedBean.property.isRentable}" value="#{registerPropertyManagedBean.property.dailyRentPrice}" required="true"  />
                 
                 <p:outputLabel for="category" value="Categoria" />
                 <p:selectOneMenu 
@@ -61,19 +72,19 @@ and open the template in the editor.
                 <p:outputLabel for="cep" value="Cep:" />
                 
                 
-                <p:inputText  id="cep" value="#{registerPropertyManagedBean.cep}"  maxlength="8" required="true" 
+                <p:inputText   id="cep" value="#{registerPropertyManagedBean.cep}"  maxlength="8" required="true" 
                              validatorMessage="Insira um CEP válido">   
                    
                     <p:ajax   event="keyup" update="street, city, state" listener="#{registerPropertyManagedBean.refreshCep}" />
-                </p:inputText>                
+                </p:inputText >                
                  
                 <p:outputLabel for="street" value="Rua:" />
                 <p:inputText id="street" value="#{registerPropertyManagedBean.property.address.street}" required="true"/>
                 
                 <p:outputLabel for="number" value="Número:" />
-                <p:inputText id="number" value="#{registerPropertyManagedBean.property.address.number}" required="true" >
+                <p:inputText  id="number" value="#{registerPropertyManagedBean.property.address.number}" required="true" >
                    
-                </p:inputText>
+                </p:inputText >
                 
                 <p:outputLabel for="city" value="Cidade:" />
                 <p:inputText id="city" value="#{registerPropertyManagedBean.property.address.city}" disabled="true"  required="true"/>          
@@ -86,16 +97,16 @@ and open the template in the editor.
                 <p:inputText id="addinfo" value="#{registerPropertyManagedBean.property.address.additionalInfo}"/>   
                 
                 <p:outputLabel for="bathrooms" value="Banheiros" />
-                <p:inputText id="bathrooms" value="#{registerPropertyManagedBean.property.bathrooms}" required="true"/>    
+                <p:inputText  id="bathrooms" value="#{registerPropertyManagedBean.property.bathrooms}" required="true"/>    
                 
                  <p:outputLabel for="bedrooms" value="Dormitórios:" />
-                 <p:inputText id="bedrooms" value="#{registerPropertyManagedBean.property.bedrooms}" required="true"/>  
+                 <p:inputText  id="bedrooms" value="#{registerPropertyManagedBean.property.bedrooms}" required="true"/>  
                  
                  <p:outputLabel for="parkinglot" value="Vagas na garagem:" />
-                 <p:inputText id="parkinglot" value="#{registerPropertyManagedBean.property.parkingSlot}" required="true"/>  
+                 <p:inputText  id="parkinglot" value="#{registerPropertyManagedBean.property.parkingSlot}" required="true"/>  
                 
                  <p:outputLabel for="area" value="Área (Metros Quadrados):" />
-                 <p:inputText id="area" value="#{registerPropertyManagedBean.property.squareMeter}" required="true"/>
+                 <p:inputNumber  id="area" value="#{registerPropertyManagedBean.property.squareMeter}" required="true"/>
                  
                 
                 
@@ -104,5 +115,5 @@ and open the template in the editor.
                 
             </p:panelGrid>
         </h:form>
-    </h:body>
-</html>
+    </ui:define>
+</ui:composition>

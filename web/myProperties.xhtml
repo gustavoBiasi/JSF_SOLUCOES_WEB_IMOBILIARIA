@@ -27,33 +27,8 @@ and open the template in the editor.
       </style>
   
         <h:form>
-        <div class="ui-g-12"> 
-            <div class="ui-g-4">
-                <p:outputLabel for="states" value="Estados:" />
-                <p:selectOneMenu id="states" value="#{mainManagedBean.selectedState}" style="width:125px">
-                    <f:selectItem itemValue="" itemLabel="Mostrar Todos os Estados"/>
-                    <f:selectItems value="#{mainManagedBean.allStates}" />
-                   <p:ajax event="change" update="propertiesMain"
-                            listener="#{mainManagedBean.filterProperties}" />
-                </p:selectOneMenu>
-            </div>
-            <div class="ui-g-4">
-                <p:outputLabel for="categories" value="Categorias:" />
-                <p:selectOneMenu id="categories" value="#{mainManagedBean.selectedCategory}" style="width:125px">
-                    <f:selectItem itemValue="" itemLabel="Mostrar Todas as Categorias"/>
-                    <f:selectItems value="#{mainManagedBean.allCategories}" />
-                   <p:ajax event="change" update="propertiesMain"
-                           listener="#{mainManagedBean.filterProperties}" />
-                </p:selectOneMenu>
-            </div>
-            <div class="ui-g-4">
-                <p:outputLabel for="search" value="Buscar:" />
-                <p:inputText id="search" value="#{mainManagedBean.searchProperty}" >
-                    <p:ajax   event="keyup" update="propertiesMain" listener="#{mainManagedBean.filterProperties}" />
-                </p:inputText>
-            </div>
-        </div>
-            <p:dataScroller id="propertiesMain" value="#{mainManagedBean.filteredProperties}" var="prop" chunkSize="10" >
+
+            <p:dataScroller id="propertiesMain" value="#{myPropertiesManagedBean.allProperties}" var="prop" chunkSize="10" >
       
 
                 
@@ -104,10 +79,13 @@ and open the template in the editor.
                            <h5 style="text-align:right"> Estado: #{prop.address.state} </h5> 
                            <br/>
                            <h5 style="text-align:right"> Categoria: #{prop.category.title} </h5> 
+                             <p:menuButton value="Options">
+                                 <p:menuitem value="Save" actionListener="#{myPropertiesManagedBean.edit(property)}" update="messages" icon="ui-icon-disk"/>
+                                 <p:menuitem value="Delete" actionListener="#{myPropertiesManagedBean.delete(property)}" ajax="false" icon="ui-icon-close"/>
+                                <p:separator />
+                             </p:menuButton>
                            
-                           
-                           <p:commandButton update="@this" style="float:right"  styleClass="#{mainManagedBean.getIsFavorited(prop) ? 'favorited-button' : 'normal-button'}"  value="#{mainManagedBean.getIsFavorited(prop) ? 'Desfavoritar' : 'Favoritar'}" action="#{mainManagedBean.favoriteProperty(prop)}" ></p:commandButton>
-                      </div>
+                       </div>
                       
                      
                   </div>

@@ -54,6 +54,18 @@ public class PropertyRepository implements Serializable{
         }
         
     }
+   public List<Property> findAllPropertiesOwned(long userId)
+    {
+          try{
+            Query query = manager.createQuery("SELECT p FROM Property p WHERE p.owner.id = :userid");
+            query.setParameter("userid", userId);
+            return query.getResultList();
+        }catch(NoResultException e) {
+            return null;
+        }
+        
+    }
+    
     
     public List<Property> findAllFavoritedProperties(long userId)
     {
@@ -67,11 +79,33 @@ public class PropertyRepository implements Serializable{
         
     }
     
+
     
     
     public List<Property> findAllProperties(){
         try{
             Query query=manager.createQuery("SELECT p from Property p");
+            return query.getResultList();
+            
+        }catch(NoResultException ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    public List<Property> findFilteredProperties(String category, String state, String search){
+        try{
+            StringBuilder queryString = new StringBuilder("Select p from Property p WHERE 1=1 ");
+            if(!category.equals("")) queryString.append("AND p.category.title = :category ");
+
+            if(!state.equals("")) queryString.append("AND p.address.state = :state ");
+       
+            if(!search.equals("")) queryString.append("AND p.title LIKE :search ");
+            Query query= manager.createQuery(queryString.toString());
+            if(!category.equals("")) query.setParameter("category", category);
+            if(!state.equals("")) query.setParameter("state", state);
+            if(!search.equals("")) query.setParameter("search", "%"+search+"%");
+           
             return query.getResultList();
             
         }catch(NoResultException ex){

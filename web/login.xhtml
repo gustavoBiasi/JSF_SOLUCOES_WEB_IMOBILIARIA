@@ -1,22 +1,14 @@
-
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    <h:body>
+<ui:composition template="public/template.xhtml" 
+    xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+     xmlns:ui="http://java.sun.com/jsf/facelets">
+ 
+    <ui:define name="content">
         <h:form>
             <p:messages id="messages" />
-            <p:panelGrid columns="2">
+            <p:panelGrid columns="2" style="margin:0 auto">
                 <p:outputLabel for="userEmail" value="Email:" />
                 <p:inputText id="userEmail" value="#{loginManagedBean.user.email}" required="true" />
                 
@@ -29,5 +21,5 @@ and open the template in the editor.
                 <p:button value="Cadastrar-se" outcome="public/signup"  icon="ui-icon-info" ></p:button>
             </p:panelGrid>
         </h:form>
-    </h:body>
-</html>
+    </ui:define>
+</ui:composition>

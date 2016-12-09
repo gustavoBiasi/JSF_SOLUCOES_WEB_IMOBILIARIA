@@ -69,7 +69,7 @@ public class RegisterPropertyManagedBean implements Serializable {
         
                
         categories = categoryRepository.getAllCategories();
-        
+        photos = new ArrayList<UploadedFile>();
        
        
         
@@ -111,7 +111,7 @@ public class RegisterPropertyManagedBean implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Verifique sua conexão", "Ocorreu um erro!"));
             }
             property = new Property();
-            return "detail.xhtml?id=" + newId;
+            return "detail?id=" + newId;
         }
         FacesContext.getCurrentInstance().addMessage(
                     null, 

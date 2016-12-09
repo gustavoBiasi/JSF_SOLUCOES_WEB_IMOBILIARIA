@@ -60,7 +60,7 @@ public class PropertyDetailManagedBean implements Serializable {
 
     @PostConstruct
     public void init() {
-       // this.id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+        this.id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
         if(id != null)this.property = propertyRepository.getById(Long.parseLong(id));
         geoModel = new DefaultMapModel();
         
